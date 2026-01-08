@@ -540,20 +540,24 @@ function processLogic(text) {
   switch (chatState.step) {
     case "IDLE":
     case "WAITING_NAME":
-      if (isLikelyName(text)) {
+      if (lower.includes("omitir") || lower.includes("no decir")) {
+        chatState.name = "Amigo";
+        chatState.step = "WAITING_EVENT";
+        addBotMsg("No hay problema. ¿Qué tipo de evento estás planeando?", ["Boda", "Fiesta", "Corporativo", "XV Años", "Consultar"]);
+      } else if (isLikelyName(text)) {
         chatState.name = sanitizeName(text);
         chatState.step = "WAITING_EVENT";
-        addBotMsg(`Encantado, ${chatState.name}. ¿Qué tipo de evento estás planeando? Así te propongo paquetes y cotizaciones que encajen con tu estilo.`, ["Boda", "Fiesta", "Corporativo", "XV Años", "No sé / Consultar"]);
+        addBotMsg(`Encantado, ${chatState.name}. ¿Qué tipo de evento estás planeando?`, ["Boda", "Fiesta", "Corporativo", "XV Años", "Consultar"]);
       } else {
         addBotMsg("Perfecto — para darte opciones personalizadas dime tu nombre (ej. 'Me llamo Ana'), o responde 'Prefiero omitir'.", ["Me llamo ...", "Prefiero omitir"]);
         chatState.step = "WAITING_NAME";
       }
       break;
     case "WAITING_EVENT":
-      if (looksLikeEventType(lower)) {
+      if (looksLikeEventType(lower) || lower.length > 2) {
         chatState.type = normalizeEventType(lower);
         chatState.step = "MENU";
-        addBotMsg(`Excelente — somos especialistas en ${chatState.type}. Puedo recomendarte paquetes ideales o preparar una cotización prioritaria. ¿Qué te gustaría ahora, ${chatState.name || 'amigo'}?`, ["Mostrar paquetes destacados", "Quiero una cotización", "Conectar por WhatsApp", "Ver Colección"]);
+        addBotMsg(`Excelente — somos especialistas en ${chatState.type}. ¿Qué te gustaría hacer ahora, ${chatState.name || 'amigo'}?`, ["Mostrar paquetes destacados", "Quiero una cotización", "Conectar por WhatsApp", "Ver Colección"]);
       } else {
         addBotMsg("¿Es boda, fiesta, corporativo, XV años u otro? Si no estás seguro, puedo ayudarte a elegir la mejor opción para tu evento.", ["Boda", "Fiesta", "Corporativo", "Otro"]);
       }
@@ -587,8 +591,15 @@ function processLogic(text) {
 
 function handleMenuOptions(lower, rawText) {
   const normalized = (rawText || '').trim().toLowerCase();
+  
+  if (normalized.includes('menú') || normalized.includes('menu') || normalized.includes('inicio') || normalized.includes('volver')) {
+    addBotMsg("Menú principal — ¿En qué puedo apoyarte?", ["Mostrar paquetes", "Quiero una cotización", "Conectar por WhatsApp"]);
+    chatState.step = "MENU";
+    return;
+  }
+
   // Exact intent mapping first (more deterministic)
-  if (normalized === 'ver paquetes' || normalized.startsWith('ver paquetes') || normalized === 'paquetes' || normalized.includes('ver paquetes')) {
+  if (normalized === 'ver paquetes' || normalized.includes('paquetes') || normalized.includes('destacados')) {
     const pack = recommendPackageForEvent(chatState.type);
     const name = pack && (pack.name || pack.titulo) ? (pack.name || pack.titulo) : 'uno de nuestros paquetes';
     const priceLabel = pack && pack.price ? `$${formatMoney(pack.price)}` : 'según tu selección';
