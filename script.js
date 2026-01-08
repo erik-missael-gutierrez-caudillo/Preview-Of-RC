@@ -10,6 +10,18 @@
 */
 
 /* ===========================
+  Funciones Públicas (usadas en HTML)
+   =========================== */
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobile-menu");
+  if (!menu) return;
+  menu.classList.toggle("translate-x-full");
+  // Block body scroll when menu open
+  document.body.classList.toggle("overflow-hidden");
+}
+
+
+/* ===========================
    0. GLOBALS & UTILITIES
    =========================== */
 const LOCALE = 'es-MX';
@@ -31,30 +43,7 @@ let chatState = {
   attempts: 0
 };
 
-/* Inject minimal runtime CSS that removes numeric input spinners and supports simple animations.
-   It's recommended to move these rules to your main stylesheet.
-*/
-(function injectCriticalCSS() {
-  const css = `
-    /* Remove spinners (WebKit + Firefox) */
-    input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    input[type=number] { -moz-appearance: textfield; }
-    .qty-input { -moz-appearance: textfield; appearance: textfield; }
-    .reaction-scale { transform: scale(1.12); transition: transform 160ms ease; }
-    .reaction-active { color: var(--gold-400, #f59e0b); }
-    .hidden { display: none !important; }
-    .fade-in-up { animation: fadeInUp .28s ease both; }
-    @keyframes fadeInUp { from { opacity:0; transform: translateY(6px);} to { opacity:1; transform: translateY(0);} }
-    .label-reveal { opacity: 1; transform: translateY(0); transition: all .35s ease; }
-    .card-content-scroll { max-height: 9rem; overflow:auto; }
-    .nested-thread-container { display:none; margin-top: .5rem; }
-    .nested-thread-container.open { display:block; }
-  `;
-  const s = document.createElement('style');
-  s.setAttribute('data-runtime', 'renteconfort');
-  s.textContent = css;
-  document.head.appendChild(s);
-})();
+/* Critical CSS moved to style.css */
 
 /* ===========================
    1. INVENTORY / PAQUETES (same data, kept for completeness)
@@ -93,23 +82,23 @@ const inventoryPaquetes = [
 ];
 
 const paquetes = [
-  { id: 1, titulo: "Boda Imperial", categoria: "grand", pax: "150 personas", precio: 18500, desc: "El lujo máximo. Carpa estructural gigante, pista de charol y vajilla gold.", items: [101,201,202,303,306,307,301,401,402] },
-  { id: 2, titulo: "Gala Corporativa", categoria: "grand", pax: "100 personas", precio: 12800, desc: "Ideal para cenas de fin de año. Elegancia sobria con sillas Tiffany y mantelería fina.", items: [102,208,205,303,308,309,402] },
-  { id: 3, titulo: "Cóctel Sunset", categoria: "medium", pax: "60 personas", precio: 6500, desc: "Ambiente relajado semi-cubierto con salas lounge y mesas altas.", items: [103,203,207,305,310,403,404] },
-  { id: 4, titulo: "Cena Toscana", categoria: "medium", pax: "50 personas", precio: 7200, desc: "Estilo rústico elegante. Mesas de parota sin mantel y luces cálidas.", items: [103,201,202,306,307,302,402] },
-  { id: 5, titulo: "Petit Comité", categoria: "boutique", pax: "Menos de 30 personas", precio: 3900, desc: "Exclusividad íntima. Sillas Phoenix transparentes y detalles premium.", items: [105,210,204,303,306,307,404] }
+  { id: 1, titulo: "Boda Imperial", categoria: "grand", pax: "150 personas", precio: 18500, desc: "El lujo máximo. Carpa estructural gigante, pista de charol y vajilla gold.", items: [101, 201, 202, 303, 306, 307, 301, 401, 402] },
+  { id: 2, titulo: "Gala Corporativa", categoria: "grand", pax: "100 personas", precio: 12800, desc: "Ideal para cenas de fin de año. Elegancia sobria con sillas Tiffany y mantelería fina.", items: [102, 208, 205, 303, 308, 309, 402] },
+  { id: 3, titulo: "Cóctel Sunset", categoria: "medium", pax: "60 personas", precio: 6500, desc: "Ambiente relajado semi-cubierto con salas lounge y mesas altas.", items: [103, 203, 207, 305, 310, 403, 404] },
+  { id: 4, titulo: "Cena Toscana", categoria: "medium", pax: "50 personas", precio: 7200, desc: "Estilo rústico elegante. Mesas de parota sin mantel y luces cálidas.", items: [103, 201, 202, 306, 307, 302, 402] },
+  { id: 5, titulo: "Petit Comité", categoria: "boutique", pax: "Menos de 30 personas", precio: 3900, desc: "Exclusividad íntima. Sillas Phoenix transparentes y detalles premium.", items: [105, 210, 204, 303, 306, 307, 404] }
 ];
 
 /* ===========================
    2. BOT CONFIG
    =========================== */
 const SCORING = {
-  high: ["presupuesto","precio","cotizar","cotización","carrito","comprar","compra","reservar","pagar","pago"],
-  location: ["ubicación","ubicacion","showroom","donde","dirección","direccion","mapa"],
-  browse: ["ver","mirar","fotos","galería","catálogo","catalogo","paquetes","colección","coleccion"]
+  high: ["presupuesto", "precio", "cotizar", "cotización", "carrito", "comprar", "compra", "reservar", "pagar", "pago"],
+  location: ["ubicación", "ubicacion", "showroom", "donde", "dirección", "direccion", "mapa"],
+  browse: ["ver", "mirar", "fotos", "galería", "catálogo", "catalogo", "paquetes", "colección", "coleccion"]
 };
 const PACKAGE_DISCOUNT = 0.10;
-const GIBBERISH_KEY_SEQ = ['qwer','wert','asdf','sdfg','zxcv','xcvb','hjkl','yuiop','zxcvbn'];
+const GIBBERISH_KEY_SEQ = ['qwer', 'wert', 'asdf', 'sdfg', 'zxcv', 'xcvb', 'hjkl', 'yuiop', 'zxcvbn'];
 const MAX_INVALID_ATTEMPTS = 2;
 const LEAD_AGGRESSIVE_THRESHOLD = 50;
 
@@ -147,7 +136,7 @@ function filtrarPaquetes(filtro) {
 function renderizarPuntos() {
   if (!contenedorPuntos) return;
   contenedorPuntos.innerHTML = estado.paquetesVisibles.map((_, idx) => `
-    <button aria-label="Ir al slide ${idx+1}" onclick="clickPunto(${idx})"
+    <button aria-label="Ir al slide ${idx + 1}" onclick="clickPunto(${idx})"
             class="w-3 h-3 rounded-full transition-colors duration-300 ${idx === estado.indiceActual ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/70'}">
     </button>
   `).join('');
@@ -395,7 +384,7 @@ function toggleChat() {
   win.classList.toggle("hidden");
   if (!win.classList.contains("hidden") && chatState.step === "IDLE") {
     botThinking(() => {
-      addBotMsg("¡Hola! Soy Santiago. 👋 Bienvenido a Rente Confort. ¿Cuál es tu nombre?", ["Me llamo...", "Prefiero no decir"]);
+      addBotMsg("¡Hola! Soy Santiago 👋 de Rente Confort. Estoy aquí para ayudarte a diseñar un evento inolvidable — ¿cómo te llamas?", ["Me llamo...", "Prefiero no decirlo"]);
       chatState.step = "WAITING_NAME";
       chatState.attempts = 0;
     });
@@ -451,6 +440,52 @@ function renderSuggestions(opts) {
 
 /* Use selectSuggestion(value, autoSend=false) to optionally auto-send */
 function selectSuggestion(value, autoSend = false) {
+  const val = (value || '').toString().trim();
+  if (!val) return;
+  const normalized = val.toLowerCase();
+  // Handle UI actions directly for some suggestions to avoid sending ambiguous messages
+  if (normalized === 'ir a colección' || normalized === 'ir a coleccion' || normalized === 'ver catálogo' || normalized === 'ver catalogo') {
+    const target = document.getElementById('coleccion') || document.getElementById('paquetes');
+    target?.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  if (normalized === 'ver paquetes' || normalized === 'paquetes' || normalized === 'ver paquetes' || normalized === 'mostrar paquetes destacados' || normalized === 'mostrar paquetes') {
+    filtrarPaquetes('all');
+    document.getElementById('paquetes')?.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  if (normalized === 'ubicación' || normalized === 'ubicacion' || normalized === 'ver ubicación') {
+    showLocation();
+    return;
+  }
+  if (normalized === 'abrir whatsapp' || normalized === 'conectar por whatsapp' || normalized === 'conectar por whatsapp' || normalized === 'priorizar por whatsapp') {
+    openWhatsApp(leadWhatsAppText());
+    return;
+  }
+  if (normalized === 'cotizar por whatsapp' || normalized === 'enviar por whatsapp' || normalized === 'enviar y solicitar cotización') {
+    openWhatsApp(leadWhatsAppText());
+    return;
+  }
+  // Quick quote / auto-send intents
+  if (normalized === 'quiero una cotización' || normalized === 'cotización rápida' || normalized === 'cotizacion rapida' || normalized === 'sí, preparar cotización' || normalized === 'sí, por favor' || normalized === 'cotización rápida') {
+    const input = document.getElementById('chat-input');
+    if (input) {
+      input.value = `Solicito cotización prioritaria para un evento ${chatState.type || ''}`.trim();
+      input.focus();
+      handleUserMessage();
+    }
+    return;
+  }
+  if (normalized === 'preparar selección para mi evento' || normalized === 'preparar selección' || normalized === 'preparar seleccion para mi evento') {
+    const input = document.getElementById('chat-input');
+    if (input) {
+      input.value = `¿Puedes preparar una selección recomendada para mi ${chatState.type || 'evento'}?`;
+      input.focus();
+      handleUserMessage();
+    }
+    return;
+  }
+  // default: fill input (optionally auto-send)
   const input = document.getElementById("chat-input");
   if (!input) return;
   input.value = value;
@@ -516,9 +551,9 @@ function processLogic(text) {
       if (isLikelyName(text)) {
         chatState.name = sanitizeName(text);
         chatState.step = "WAITING_EVENT";
-        addBotMsg(`Un gusto, ${chatState.name}. ¿Qué tipo de evento estás planeando?`, ["Boda", "Fiesta", "Corporativo", "XV Años", "No sé / Consultar"]);
+        addBotMsg(`Encantado, ${chatState.name}. ¿Qué tipo de evento estás planeando? Así te propongo paquetes y cotizaciones que encajen con tu estilo.`, ["Boda", "Fiesta", "Corporativo", "XV Años", "No sé / Consultar"]);
       } else {
-        addBotMsg("¿Podrías decirme tu nombre para personalizar la atención? — Ejemplo: 'Me llamo Ana'.", ["Me llamo ...", "Prefiero omitir"]);
+        addBotMsg("Perfecto — para darte opciones personalizadas dime tu nombre (ej. 'Me llamo Ana'), o responde 'Prefiero omitir'.", ["Me llamo ...", "Prefiero omitir"]);
         chatState.step = "WAITING_NAME";
       }
       break;
@@ -526,9 +561,9 @@ function processLogic(text) {
       if (looksLikeEventType(lower)) {
         chatState.type = normalizeEventType(lower);
         chatState.step = "MENU";
-        addBotMsg(`Excelente. Somos especialistas en ${chatState.type}. ¿Cómo puedo ayudarte hoy, ${chatState.name || 'amigo'}?`, ["Ver Catálogo", "Ver Paquetes", "Ubicación", "Presupuesto"]);
+        addBotMsg(`Excelente — somos especialistas en ${chatState.type}. Puedo recomendarte paquetes ideales o preparar una cotización prioritaria. ¿Qué te gustaría ahora, ${chatState.name || 'amigo'}?`, ["Mostrar paquetes destacados", "Quiero una cotización", "Conectar por WhatsApp", "Ver Colección"]);
       } else {
-        addBotMsg("No estoy seguro de ese tipo de evento. ¿Es boda, fiesta, corporativo, XV años u otro?", ["Boda", "Fiesta", "Corporativo", "Otro"]);
+        addBotMsg("¿Es boda, fiesta, corporativo, XV años u otro? Si no estás seguro, puedo ayudarte a elegir la mejor opción para tu evento.", ["Boda", "Fiesta", "Corporativo", "Otro"]);
       }
       break;
     case "MENU":
@@ -539,7 +574,7 @@ function processLogic(text) {
       break;
     case "AWAITING_VISIT_DATE":
       chatState.step = "MENU";
-      addBotMsg(`Perfecto ${chatState.name || ''}, he registrado tu preferencia para "${text}". Un asesor se pondrá en contacto. ¿Quieres que te conecte ahora por WhatsApp?`, ["Abrir WhatsApp", "Volver al Menú"]);
+      addBotMsg(`Perfecto ${chatState.name || ''}, registré tu preferencia para "${text}". ¿Deseas que priorice tu solicitud y te conecte ahora por WhatsApp para agilizar la respuesta?`, ["Sí, conectar por WhatsApp", "Volver al Menú"]);
       _captureLeadIfNeeded();
       break;
     case "CLOSING":
@@ -547,59 +582,76 @@ function processLogic(text) {
       delayedClose();
       break;
     default:
-      addBotMsg(`Perdón, me perdí un poco. ¿Quieres que volvamos al menú principal o prefieres que te conecte con un asesor por WhatsApp?`, ["Volver al Menú", "Conectar por WhatsApp"]);
+      addBotMsg(`Si quieres, puedo preparar una cotización rápida, mostrar paquetes recomendados o conectarte con un asesor por WhatsApp. ¿Qué prefieres?`, ["Cotización rápida", "Ver Paquetes", "Conectar por WhatsApp"]);
       chatState.step = "MENU";
   }
   if (chatState.leadScore >= LEAD_AGGRESSIVE_THRESHOLD) {
     setTimeout(() => {
-      addBotMsg(`🔥 ${chatState.name || 'Veo'} que buscas una cotización o compra. ¿Quieres atención prioritaria por WhatsApp?`, ["Conectar ahora", "Ver paquetes"]);
+      addBotMsg(`Veo que buscas una cotización. Puedo priorizar tu solicitud y conectarte por WhatsApp para atención rápida y personalizada. ¿Quieres que lo haga ahora?`, ["Sí, priorizar", "Ver paquetes"]);
       chatState.leadScore = Math.max(0, chatState.leadScore - 40);
     }, 800);
   }
 }
 
 function handleMenuOptions(lower, rawText) {
-  if (containsAny(lower, SCORING.location)) { showLocation(); chatState.step = "MENU"; return; }
-  if (containsAny(lower, SCORING.browse)) { addBotMsg("Puedes ver todo nuestro inventario en la sección 'Colección'. ¿Quieres que te acompañe ahí?", ["Ir a Colección", "Ver Paquetes", "Volver al Menú"]); document.getElementById("cotizador")?.scrollIntoView({ behavior: "smooth" }); chatState.step = "MENU"; return; }
-  if (containsAny(lower, ["presupuesto","presupuestos","cotizar","cotización","precio","paquetes","cotizacion"])) {
-    chatState.leadScore += 20;
+  const normalized = (rawText || '').trim().toLowerCase();
+  // Exact intent mapping first (more deterministic)
+  if (normalized === 'ver paquetes' || normalized.startsWith('ver paquetes') || normalized === 'paquetes' || normalized.includes('ver paquetes')) {
     const pack = recommendPackageForEvent(chatState.type);
-    addBotMsg(`${chatState.name || 'Cliente'}, para tu evento de ${chatState.type || 'tipo no definido'} te recomiendo: "${pack.name}" a aproximadamente $${formatMoney(pack.price)}. ¿Quieres una cotización formal o te conecto por WhatsApp?`, ["Cotizar por WhatsApp", "Ver más paquetes", "Volver al Menú"]);
+    const name = pack && (pack.name || pack.titulo) ? (pack.name || pack.titulo) : 'uno de nuestros paquetes';
+    const priceLabel = pack && pack.price ? `$${formatMoney(pack.price)}` : 'según tu selección';
+    addBotMsg(`${chatState.name || 'Cliente'}, para tu evento te recomiendo ${name} por aproximadamente ${priceLabel}. ¿Deseas que prepare una cotización prioritaria y te la envíe por WhatsApp ahora?`, ["Sí, preparar cotización", "Ver más paquetes", "Enviar por WhatsApp"]);
     chatState.step = "MENU";
     _captureLeadIfNeeded();
     return;
   }
-  if (chatState.context && chatState.context.hasCart && containsAny(lower, ["carrito","revisar","pedido","check","disponibilidad","compra","checkout"])) {
-    chatState.step = "CART_FLOW";
-    addBotMsg("Veo que tienes productos seleccionados. ¿Deseas que verifique disponibilidad y te pase precios totales?", ["Sí, revisar ahora", "Solo estoy viendo"]);
+  // Location
+  if (containsAny(lower, SCORING.location)) { showLocation(); chatState.step = "MENU"; return; }
+  // Budget / quote
+  if (normalized.includes('presupuesto') || normalized.includes('cotizar') || containsAny(lower, ['precio', 'cotización', 'cotizacion'])) {
+    chatState.leadScore = Math.min(100, chatState.leadScore + 20);
+    const pack = recommendPackageForEvent(chatState.type);
+    const packName = pack ? (pack.name || pack.titulo) : 'nuestros paquetes';
+    const packPrice = pack && pack.price ? `$${formatMoney(pack.price)}` : 'según selección';
+    addBotMsg(`${chatState.name || 'Cliente'}, para tu evento de ${chatState.type || 'tipo no definido'} te recomiendo: "${packName}" a aproximadamente ${packPrice}. Puedo generar una cotización formal y priorizarla por WhatsApp para darte respuesta más rápida. ¿Te interesa?`, ["Sí, por favor", "Ver más paquetes", "Conectar por WhatsApp"]);
+    chatState.step = "MENU";
+    _captureLeadIfNeeded();
     return;
   }
-  if (containsAny(lower, ["whatsapp","hablar","conectar","asesor","humano"])) {
-    addBotMsg(`Te conecto al WhatsApp para atención personalizada. ${chatState.name ? chatState.name + ',' : ''} te llevaré con un asesor.`, []);
+  // Cart flow
+  if (chatState.context && chatState.context.hasCart && containsAny(lower, ["carrito", "revisar", "pedido", "check", "disponibilidad", "compra", "checkout"])) {
+    chatState.step = "CART_FLOW";
+    addBotMsg("Veo que tienes productos seleccionados. Puedo verificar disponibilidad y darte el precio final; si quieres, priorizo y te lo envío por WhatsApp para agilizar la respuesta.", ["Sí, revisar ahora", "Priorizar por WhatsApp", "Solo estoy viendo"]);
+    return;
+  }
+  // WhatsApp explicit request
+  if (containsAny(lower, ["whatsapp", "hablar", "conectar", "asesor", "humano"])) {
+    addBotMsg(`Perfecto${chatState.name ? ' ' + chatState.name + ',' : ''} — te conecto ahora con un asesor por WhatsApp para atención personalizada y respuesta prioritaria.`, []);
     openWhatsApp(leadWhatsAppText());
     chatState.step = "MENU";
     return;
   }
-  if (lower.includes("ver paquetes") || lower.includes("paquetes")) {
-    const pack = recommendPackageForEvent(chatState.type);
-    addBotMsg(`Te recomiendo: "${pack.name}" - $${formatMoney(pack.price)}. ¿Te lo envío por WhatsApp o prefieres ver más opciones?`, ["Enviar por WhatsApp", "Ver más paquetes", "Volver al Menú"]);
+  // Browse intent (less specific)
+  if (containsAny(lower, SCORING.browse)) {
+    addBotMsg("Puedo mostrarte nuestra colección curada y destacar paquetes que mejor funcionan para tu evento. ¿Qué prefieres?", ["Mostrar paquetes destacados", "Preparar selección para mi evento", "Volver al Menú"]);
+    document.getElementById("cotizador")?.scrollIntoView({ behavior: "smooth" });
     chatState.step = "MENU";
-    _captureLeadIfNeeded();
     return;
   }
-  addBotMsg("No estoy seguro de entender, ¿prefieres ver la ubicación, solicitar un presupuesto o volver al menú?", ["Ubicación", "Presupuesto", "Volver al Menú"]);
+  // Fallback: ask a clarifying question
+  addBotMsg("No estoy seguro de entender. ¿Quieres que prepare una cotización rápida, vea paquetes recomendados o te conecte con un asesor por WhatsApp?", ["Cotización rápida", "Ver Paquetes", "Conectar por WhatsApp"]);
   chatState.step = "MENU";
 }
 
 function handleCartFlow(lower, rawText) {
-  if (containsAny(lower, ["sí","si","quiero","revisar","ok","disponibilidad"])) {
+  if (containsAny(lower, ["sí", "si", "quiero", "revisar", "ok", "disponibilidad"])) {
     sendWhatsAppCart();
     chatState.step = "CLOSING";
-  } else if (containsAny(lower, ["solo","no","seguir","viendo","ver"])) {
-    addBotMsg("Entendido. Puedes seguir navegando por la colección. Si cambias de opinión, aquí estaré.", ["Ver Colección", "Menú Principal"]);
+  } else if (containsAny(lower, ["solo", "no", "seguir", "viendo", "ver"])) {
+    addBotMsg("Perfecto — sigue navegando. Si quieres que priorice tu solicitud más tarde, dímelo y la preparo.", ["Ver Colección", "Volver al Menú"]);
     chatState.step = "MENU";
   } else {
-    addBotMsg("¿Quieres que te revise el carrito ahora o prefieres seguir navegando?", ["Revisar ahora", "Seguir navegando"]);
+    addBotMsg("¿Deseas que revise el carrito ahora y te pase disponibilidad y total? Puedo priorizar y enviarlo por WhatsApp si lo prefieres.", ["Revisar ahora", "Priorizar por WhatsApp", "Seguir navegando"]);
     chatState.step = "CART_FLOW";
   }
 }
@@ -634,8 +686,8 @@ function sendWhatsAppCart() {
   const pack = recommendPackageForEvent(chatState.type);
   if (pack && pack.price) msg += `\n*Paquete recomendado:* ${pack.name} - $${formatMoney(pack.price)}\n`;
   msg += `\n*Total Estimado: $${formatMoney(total)}*\n\n¿Tienen disponibilidad para la fecha indicada?`;
-  addBotMsg(`He generado tu resumen. Haz clic abajo para enviármelo y darte seguimiento ☺️.`, []);
-  addLinkBtn(`https://wa.me/524778217435?text=${encodeURIComponent(msg)}`, "Enviar a WhatsApp ☺️");
+  addBotMsg(`He generado un resumen listo para enviar. Haz clic abajo para enviarlo por WhatsApp y recibir seguimiento prioritario.`, []);
+  addLinkBtn(`https://wa.me/524778217435?text=${encodeURIComponent(msg)}`, "Enviar y solicitar cotización");
   delayedClose();
   _captureLeadIfNeeded();
 }
@@ -644,10 +696,14 @@ function sendWhatsAppCart() {
    7. BOT utilities
    =========================== */
 function evaluateLeadKeywords(text) {
-  for (const k of SCORING.high) if (text.includes(k)) chatState.leadScore += 30;
-  for (const k of SCORING.location) if (text.includes(k)) chatState.leadScore += 20;
-  for (const k of SCORING.browse) if (text.includes(k)) chatState.leadScore += 5;
-  chatState.leadScore = Math.min(100, chatState.leadScore);
+  try {
+    const t = (text || '').toLowerCase();
+    let matched = { high: false, location: false, browse: false };
+    for (const k of SCORING.high) { if (!matched.high && t.includes(k)) { chatState.leadScore += 30; matched.high = true; } }
+    for (const k of SCORING.location) { if (!matched.location && t.includes(k)) { chatState.leadScore += 20; matched.location = true; } }
+    for (const k of SCORING.browse) { if (!matched.browse && t.includes(k)) { chatState.leadScore += 5; matched.browse = true; } }
+    chatState.leadScore = Math.min(100, chatState.leadScore);
+  } catch (e) { console.warn('evaluateLeadKeywords error', e); }
 }
 
 function leadWhatsAppText() {
@@ -680,25 +736,28 @@ function containsAny(text, arr) {
   return false;
 }
 function looksLikeEventType(lower) {
-  return containsAny(lower, ["boda","fiesta","corporativo","empresarial","xv","15","graduación","bautizo","cumpleaños"]);
+  return containsAny(lower, ["boda", "fiesta", "corporativo", "empresarial", "xv", "15", "graduación", "bautizo", "cumpleaños"]);
 }
 function normalizeEventType(lower) {
   if (lower.includes("boda")) return "boda";
   if (lower.includes("xv") || lower.includes("15")) return "15años";
-  if (containsAny(lower, ["corp","empresarial"])) return "corporativo";
+  if (containsAny(lower, ["corp", "empresarial"])) return "corporativo";
   if (lower.includes("bautizo")) return "bautizo";
   if (lower.includes("fiesta") || lower.includes("cumple")) return "fiesta";
   return "evento";
 }
 function recommendPackageForEvent(eventType) {
   const key = (eventType || '').toLowerCase();
-  let found;
-  if (key.includes("boda")) found = paquetes.find(p => p.titulo.toLowerCase().includes("boda")) || paquetes[0];
-  else if (key.includes("corpor") || key.includes("empresarial")) found = paquetes.find(p => p.titulo.toLowerCase().includes("gala")) || paquetes[1] || paquetes[0];
-  else if (key.includes("15") || key.includes("xv")) found = paquetes.find(p => p.titulo.toLowerCase().includes("petit") || p.titulo.toLowerCase().includes("petit comité")) || paquetes.find(p=>p.categoria==='boutique') || paquetes[0];
-  else if (key.includes("fiesta") || key.includes("cocktail") || key.includes("cóctel")) found = paquetes.find(p => p.titulo.toLowerCase().includes("cóctel") || p.categoria==='medium') || paquetes[2] || paquetes[0];
-  else found = paquetes[0];
-  const discounted = Math.round(found.precio * (1 - PACKAGE_DISCOUNT));
+  let found = null;
+  try {
+    if (key.includes("boda")) found = paquetes.find(p => p.titulo.toLowerCase().includes("boda"));
+    if (!found && (key.includes("corpor") || key.includes("empresarial"))) found = paquetes.find(p => p.titulo.toLowerCase().includes("gala"));
+    if (!found && (key.includes("15") || key.includes("xv"))) found = paquetes.find(p => p.titulo.toLowerCase().includes("petit") || p.titulo.toLowerCase().includes("petit comité"));
+    if (!found && (key.includes("fiesta") || key.includes("cocktail") || key.includes("cóctel"))) found = paquetes.find(p => p.titulo.toLowerCase().includes("cóctel") || p.categoria === 'medium');
+    if (!found) found = paquetes.find(p => p.categoria === 'grand') || paquetes[0];
+  } catch (e) { found = paquetes[0]; }
+  if (!found) found = paquetes[0] || { id: 0, titulo: 'Paquete Sugerido', precio: 0 };
+  const discounted = found.precio ? Math.round(found.precio * (1 - PACKAGE_DISCOUNT)) : 0;
   return { id: found.id, name: found.titulo, price: discounted, base: found.precio };
 }
 
@@ -711,7 +770,7 @@ function showLocation() {
   if (!chatContent) return;
   chatContent.innerHTML += `
     <div class="my-2 rounded-lg overflow-hidden border border-slate-200 shadow-sm fade-in-up ml-10 max-w-[80%]">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.4939226297374!2d-101.6666896249658!3d21.13276688054366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf61e3895eef%3A0xe544974797055745!2sCalle%20Tallin%20145%2C%20Agua%20Azul%2C%2037250%20Le%C3%B3n%2C%20Gto.!5e0!3m2!1ses-419!2smx!4v1704230000000!5m2!1ses-419!2smx" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      <iframe title="Ubicación Rente Confort León" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.4939226297374!2d-101.6666896249658!3d21.13276688054366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf61e3895eef%3A0xe544974797055745!2sCalle%20Tallin%20145%2C%20Agua%20Azul%2C%2037250%20Le%C3%B3n%2C%20Gto.!5e0!3m2!1ses-419!2smx!4v1704230000000!5m2!1ses-419!2smx" width="100%" height="150" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>`;
   scrollToBottom();
 }
@@ -721,7 +780,7 @@ function addLinkBtn(url, label) {
   if (!chatContent) return;
   chatContent.innerHTML += `
     <div class="flex justify-center my-2 fade-in-up">
-      <a href="${url}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-[#25D366] text-white px-5 py-2 rounded-full font-bold shadow hover:bg-[#20ba56] transition text-sm">
+      <a href="${url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-[#25D366] text-white px-5 py-2 rounded-full font-bold shadow hover:bg-[#20ba56] transition text-sm">
         <i class='bx bxl-whatsapp text-lg' aria-hidden="true"></i> ${label}
       </a>
     </div>`;
@@ -757,7 +816,6 @@ let commentsData = [
   { id: 3, user: "Fernanda Lujan", text: "La decoración que realizaron en mi boda fue ¡Increíble! Muchas gracias por su muy buen servicio.", rating: 5, date: "Hace 4 meses", reactions: { like: 12, love: 4, dislike: 0 }, replies: [] },
   { id: 4, user: "Pablo Santibañez", text: "Gran experiencia en todo momento, es la primera de muchas veces que realizaré un pedido con ustedes.", rating: 4, date: "Hace 1 año", reactions: { like: 2, love: 1, dislike: 0 }, replies: [] }
 ];
-
 let autoScrollInterval;
 let isPaused = false;
 const scrollSpeed = 1;
@@ -889,6 +947,60 @@ function submitReply(parentId) {
   }
 }
 
+// Review form state & functions
+let newReviewRating = 0;
+function setRating(rating) {
+  newReviewRating = rating;
+  const stars = document.querySelectorAll('#new-review-modal i.fas.fa-star');
+  if (stars && stars.length) {
+    stars.forEach((s, i) => {
+      if (i < rating) {
+        s.classList.remove('text-slate-300');
+        s.classList.add('text-gold-500');
+      } else {
+        s.classList.remove('text-gold-500');
+        s.classList.add('text-slate-300');
+      }
+    });
+  }
+}
+
+function submitNewReview() {
+  const nameEl = document.getElementById('review-name');
+  const textEl = document.getElementById('review-text');
+  const name = (nameEl && nameEl.value.trim()) || 'Usuario Invitado';
+  const text = (textEl && textEl.value.trim()) || '';
+  if (!text || text.length < 5) {
+    alert('Por favor escribe un comentario más detallado (mínimo 5 caracteres).');
+    return;
+  }
+  const rating = newReviewRating || 5;
+  const newComment = {
+    id: Date.now(),
+    user: name,
+    text: text,
+    rating: rating,
+    date: 'Hace unos segundos',
+    reactions: { like: 0, love: 0, dislike: 0 },
+    replies: []
+  };
+  commentsData.unshift(newComment);
+  renderComments();
+  // reset modal
+  if (nameEl) nameEl.value = '';
+  if (textEl) textEl.value = '';
+  newReviewRating = 0;
+  // reset stars visuals
+  const stars = document.querySelectorAll('#new-review-modal i.fas.fa-star');
+  stars.forEach(s => { s.classList.remove('text-gold-500'); s.classList.add('text-slate-300'); });
+  const modal = document.getElementById('new-review-modal');
+  if (modal) modal.classList.add('hidden');
+  // optional friendly bot note
+  addBotMsg('Gracias por compartir tu experiencia. Tu comentario será visible pronto.');
+  // ensure auto scroll resumes
+  resumeAutoScroll();
+}
+
 /* Autoscroll controls */
 function startAutoScroll() {
   if (autoScrollInterval) clearInterval(autoScrollInterval);
@@ -901,6 +1013,25 @@ function startAutoScroll() {
 }
 function pauseAutoScroll() { isPaused = true; }
 function resumeAutoScroll() { isPaused = false; }
+
+function manualScroll(direction) {
+  const container = document.getElementById('reviews-container');
+  if (!container) return;
+  const step = container.clientWidth || 480;
+  const delta = direction === 'left' ? -step : step;
+  container.scrollBy({ left: delta, behavior: 'smooth' });
+}
+
+function toggleCartMobile() {
+  const cart = document.getElementById('cart-body');
+  if (!cart) return;
+  cart.classList.toggle('cart-open');
+  const chevron = document.getElementById('cart-chevron');
+  if (chevron) chevron.classList.toggle('rotate-180');
+  const header = document.querySelector('[onclick="toggleCartMobile()"]');
+  if (header) header.setAttribute('aria-expanded', cart.classList.contains('cart-open') ? 'true' : 'false');
+}
+
 
 /* ===========================
    11. DOM READY initialization
@@ -929,17 +1060,10 @@ document.addEventListener("DOMContentLoaded", () => {
    =========================== */
 function gotoMenu() {
   chatState.step = "MENU";
-  addBotMsg('Menú principal — ¿En qué te puedo ayudar hoy? Elige una opción o escríbeme.', ['Ver Paquetes', 'Presupuesto', 'Hablar por WhatsApp']);
+  addBotMsg('Menú principal — ¿Qué prefieres ahora? Puedo preparar una cotización rápida, mostrar paquetes destacados o conectarte con un asesor por WhatsApp.', ['Cotización rápida', 'Ver Paquetes', 'Conectar por WhatsApp']);
 }
 
-/* toggle mobile menu (you had this earlier) */
-function toggleMobileMenu() {
-  const menu = document.getElementById("mobile-menu");
-  if (!menu) return;
-  menu.classList.toggle("translate-x-full");
-  // Block body scroll when menu open
-  document.body.classList.toggle("overflow-hidden");
-}
+/* duplicate toggleMobileMenu removed (defined earlier in the file) */
 
 /* botReservePackage (keeps neutral phrasing, fills input but does not auto-send) */
 function botReservePackage(pkgId) {
@@ -950,7 +1074,7 @@ function botReservePackage(pkgId) {
   setTimeout(() => {
     const input = document.getElementById('chat-input');
     if (!input) return;
-    input.value = `Solicito cotización de ${pkg.titulo}`;
+    input.value = `Solicito cotización prioritaria para "${pkg.titulo}". Por favor priorizar disponibilidad y precio.`;
     input.focus();
     // if you want to automatically send, call handleUserMessage() here or use selectSuggestion(..., true)
   }, 400);
