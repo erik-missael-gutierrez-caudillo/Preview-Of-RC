@@ -12,14 +12,6 @@
 /* ===========================
   Funciones Públicas (usadas en HTML)
    =========================== */
-function toggleMobileMenu() {
-  const menu = document.getElementById("mobile-menu");
-  if (!menu) return;
-  menu.classList.toggle("translate-x-full");
-  // Block body scroll when menu open
-  document.body.classList.toggle("overflow-hidden");
-}
-
 
 /* ===========================
    0. GLOBALS & UTILITIES
@@ -157,20 +149,20 @@ function mostrarPaquete(idx, tipoAnimacion) {
     return itemData ? `<li class="flex items-center text-sm"><i class='bx ${itemData.img} text-gold-400 mr-2 text-lg'></i> ${itemData.name}</li>` : '';
   }).join('');
   const htmlSlide = `
-    <div class="slide-content w-full h-full flex flex-col md:flex-row items-center justify-between p-8 md:p-16 gap-8 absolute top-0 left-0">
+    <div class="slide-content w-full h-full lg:max-h-[480px] flex flex-row items-center justify-between p-4 md:p-16 gap-4 absolute top-0 left-0 border border-gold-300 bg-royal-500">
       <div class="md:w-1/2 text-white z-10">
-        <div class="inline-block px-3 py-1 border border-gold-300 rounded-full text-xs font-bold uppercase tracking-widest text-gold-300 mb-4">
+        <div class="inline-block px-3 py-1 border border-gold-500 rounded-full text-[10px] font-bold uppercase tracking-widest text-gold-500 mb-2">
           Capacidad: ${pkg.pax}
         </div>
-        <h3 class="text-4xl md:text-5xl font-serif mb-4 leading-tight">${pkg.titulo}</h3>
-        <p class="text-lg text-slate-200 mb-8 font-light italic border-l-4 border-gold-500 pl-4">"${pkg.desc}"</p>
+        <h3 class="text-2xl md:text-5xl font-serif mb-4 leading-tight">${pkg.titulo}</h3>
+        <p class="text-l text-slate-200 mb-8 font-light italic border-l-4 border-gold-500 pl-4">"${pkg.desc}"</p>
         <div class="flex items-end gap-2 mb-8">
-          <span class="text-4xl font-bold text-white">$${formatMoney(pkg.precio)}</span>
+          <span class="text-2xl font-bold text-white">$${formatMoney(pkg.precio)}</span>
           <span class="text-sm text-slate-300 mb-2">/ evento</span>
         </div>
-        <button onclick="botReservePackage(${pkg.id})" class="bg-white text-royal-900 px-8 py-3 rounded hover:bg-gold-100 transition shadow-lg font-bold uppercase text-sm tracking-wide">Reservar Paquete</button>
+        <button onclick="botReservePackage(${pkg.id})" class="bg-gold-metallic text-royal-900 px-6 py-3 rounded-full hover:bg-gold-100 transition shadow-lg font-bold uppercase text-sm tracking-wide">Reservar Paquete</button>
       </div>
-      <div class="md:w-5/12 bg-royal-900/40 backdrop-blur-md p-6 rounded-lg border border-white/10 shadow-2xl z-10 w-full">
+      <div class="md:w-5/12 bg-royal-900/40 backdrop-blur-md p-6 rounded-lg border border-gold-500/50 shadow-2xl z-10 w-full">
         <h4 class="text-white font-serif mb-4 border-b border-white/20 pb-2">Incluye:</h4>
         <ul class="text-slate-100 grid grid-cols-1 gap-3">${listaItems}</ul>
       </div>
@@ -1038,10 +1030,12 @@ function toggleCartMobile() {
    =========================== */
 document.addEventListener("DOMContentLoaded", () => {
   // small nav reveal animation if nav-items exist
+  /*
   const navItems = document.querySelectorAll(".nav-item");
   setTimeout(() => { navItems.forEach((item, index) => { setTimeout(() => { item.classList.add("label-reveal"); }, index * 100); }); }, 1000);
-  setTimeout(() => { navItems.forEach((item) => item.classList.remove("label-reveal")); }, 4500);
+  setTimeout(() => { navItems.forEach((item) => item.classList.remove("label-reveal")); document.body.classList.remove('overflow-hidden')}, 4500);
 
+  */
   // initialize parts
   renderComments();
   startAutoScroll();
