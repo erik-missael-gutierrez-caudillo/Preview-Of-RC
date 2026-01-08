@@ -18,9 +18,11 @@ i.bx {
 }
 
 body {
-    background-color: #f8fafc;
-    color: #1e293b;
+    background-color: #001229;
+    color: #f8fafc;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
     -webkit-tap-highlight-color: transparent;
 }
 

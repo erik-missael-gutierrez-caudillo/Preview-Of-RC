@@ -418,30 +418,31 @@ function addUserMsg(text) {
   scrollToBottom();
 }
 
-/* Suggestions now fill input and focus it; autoSend optional */
+/* Suggestions now send directly to avoid processing issues */
 function renderSuggestions(opts) {
   const container = document.getElementById("chat-suggestions");
   if (!container) return;
   if (opts && opts.length > 0) {
     container.innerHTML = opts.map((o) => {
       const safe = escapeJs(o);
-      return `<button onclick="selectSuggestion('${safe}')" class="px-3 py-1 bg-white border border-gold-400/30 text-royal-900 rounded-full text-xs font-bold hover:bg-gold-400 hover:text-white transition shadow-sm">${o}</button>`;
+      return `<button onclick="selectSuggestion('${safe}', true)" class="px-3 py-1 bg-white border border-gold-400/30 text-royal-900 rounded-full text-xs font-bold hover:bg-gold-400 hover:text-white transition shadow-sm">${o}</button>`;
     }).join("");
   } else container.innerHTML = "";
 }
 
-/* Use selectSuggestion(value, autoSend=false) to optionally auto-send */
+/* Use selectSuggestion(value, autoSend=false) */
 function selectSuggestion(value, autoSend = false) {
   const val = (value || '').toString().trim();
   if (!val) return;
+  
   const normalized = val.toLowerCase();
-  // Handle UI actions directly for some suggestions to avoid sending ambiguous messages
+  // Handle UI actions directly for some suggestions
   if (normalized === 'ir a colección' || normalized === 'ir a coleccion' || normalized === 'ver catálogo' || normalized === 'ver catalogo') {
     const target = document.getElementById('coleccion') || document.getElementById('paquetes');
     target?.scrollIntoView({ behavior: 'smooth' });
     return;
   }
-  if (normalized === 'ver paquetes' || normalized === 'paquetes' || normalized === 'ver paquetes' || normalized === 'mostrar paquetes destacados' || normalized === 'mostrar paquetes') {
+  if (normalized === 'ver paquetes' || normalized === 'paquetes' || normalized === 'mostrar paquetes destacados' || normalized === 'mostrar paquetes') {
     filtrarPaquetes('all');
     document.getElementById('paquetes')?.scrollIntoView({ behavior: 'smooth' });
     return;
@@ -450,40 +451,20 @@ function selectSuggestion(value, autoSend = false) {
     showLocation();
     return;
   }
-  if (normalized === 'abrir whatsapp' || normalized === 'conectar por whatsapp' || normalized === 'conectar por whatsapp' || normalized === 'priorizar por whatsapp') {
+  if (normalized === 'abrir whatsapp' || normalized === 'conectar por whatsapp' || normalized === 'priorizar por whatsapp') {
     openWhatsApp(leadWhatsAppText());
     return;
   }
-  if (normalized === 'cotizar por whatsapp' || normalized === 'enviar por whatsapp' || normalized === 'enviar y solicitar cotización') {
-    openWhatsApp(leadWhatsAppText());
-    return;
-  }
-  // Quick quote / auto-send intents
-  if (normalized === 'quiero una cotización' || normalized === 'cotización rápida' || normalized === 'cotizacion rapida' || normalized === 'sí, preparar cotización' || normalized === 'sí, por favor' || normalized === 'cotización rápida') {
-    const input = document.getElementById('chat-input');
-    if (input) {
-      input.value = `Solicito cotización prioritaria para un evento ${chatState.type || ''}`.trim();
-      input.focus();
-      handleUserMessage();
-    }
-    return;
-  }
-  if (normalized === 'preparar selección para mi evento' || normalized === 'preparar selección' || normalized === 'preparar seleccion para mi evento') {
-    const input = document.getElementById('chat-input');
-    if (input) {
-      input.value = `¿Puedes preparar una selección recomendada para mi ${chatState.type || 'evento'}?`;
-      input.focus();
-      handleUserMessage();
-    }
-    return;
-  }
-  // default: fill input (optionally auto-send)
-  const input = document.getElementById("chat-input");
+
+  const input = document.getElementById('chat-input');
   if (!input) return;
-  input.value = value;
-  input.focus();
-  if (autoSend === true || autoSend === 'true') {
+
+  if (autoSend) {
+    input.value = val;
     handleUserMessage();
+  } else {
+    input.value = val;
+    input.focus();
   }
 }
 
