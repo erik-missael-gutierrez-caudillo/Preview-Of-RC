@@ -224,7 +224,7 @@ function mostrarPaquete(idx, tipoAnimacion) {
                   <span class="w-8 h-px bg-gold-400/50"></span>
                   Detalles del Set
               </h4>
-              <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 overflow-y-auto max-h-[250px] lg:max-h-none pr-2 custom-scrollbar">
+              <ul id="pkg-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 overflow-y-auto max-h-[250px] lg:max-h-none pr-2 custom-scrollbar">
                   ${listaItems}
               </ul>
           </div>

@@ -9,7 +9,17 @@ i.bx {
     }
 }
 
+#paquetes#slider-container#slider-content > span, #paquetes#slider-container#slider-content > i.bx {
+    @media (max-width: 768px) {
+        font-size: .6rem;
+    }
+}
 
+#pkg-list > ul > li {
+    @media (max-width: 768px) {
+        font-size: .5rem;
+    }
+}
 
 /* Estilos Base Luxury */
 :root {
@@ -18,11 +28,9 @@ i.bx {
 }
 
 body {
-    background-color: #001229;
-    color: #f8fafc;
+    background-color: #f8fafc;
+    color: #1e293b;
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
     -webkit-tap-highlight-color: transparent;
 }
 
