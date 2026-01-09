@@ -1066,6 +1066,32 @@ function botReservePackage(pkgId) {
   }, 400);
 }
 
+function toggleFaq(button) {
+  const item = button.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const icon = button.querySelector('i');
+  
+  // Close others
+  document.querySelectorAll('.faq-item').forEach(other => {
+    if (other !== item) {
+      other.querySelector('.faq-answer').style.maxHeight = '0';
+      other.querySelector('i').classList.remove('rotate-180');
+      other.classList.remove('border-gold-400/50');
+    }
+  });
+
+  // Toggle current
+  if (answer.style.maxHeight === '0px' || !answer.style.maxHeight) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    icon.classList.add('rotate-180');
+    item.classList.add('border-gold-400/50');
+  } else {
+    answer.style.maxHeight = '0';
+    icon.classList.remove('rotate-180');
+    item.classList.remove('border-gold-400/50');
+  }
+}
+
 /* ===========================
    End of file
    =========================== */
