@@ -415,69 +415,91 @@ class="hero-description max-w-2xl mx-auto text-slate-300 text-base md:text-lg fo
         </div>
     </section>
 
-    <section id="paquetes" class="relative py-24 bg-royal-900 overflow-x-hidden min-h-screen">
-        <div class="absolute inset-0 opacity-20 pointer-events-none">
-            <div class="absolute -top-24 -left-24 w-96 h-96 bg-gold-600/30 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[120px]"></div>
+    <section id="paquetes" class="relative py-20 lg:py-32 bg-[#0a192f] overflow-hidden min-h-screen flex flex-col justify-center">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-gold-600/10 rounded-full blur-[120px]"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-royal-400/5 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold-400/10 rounded-full blur-[120px]"></div>
         </div>
 
         <div class="container mx-auto px-4 md:px-6 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-gold-500 font-bold tracking-[0.3em] text-xs uppercase mb-3 block">Soluciones Llave en
-                    Mano</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-white mb-6">
-                    Colección Exclusiva
+            <div class="text-center mb-12 lg:mb-20">
+                <span class="inline-block text-gold-500 font-black tracking-[0.4em] text-[10px] uppercase mb-4 py-1 px-4 border-y border-gold-500/20">
+                    Soluciones Llave en Mano
+                </span>
+                <h2 class="text-4xl md:text-6xl font-serif text-white mb-6 tracking-tight">
+                    Colección <span class="text-gold-400 italic font-light">Exclusiva</span>
                 </h2>
-                <div class="flex items-center justify-center gap-4">
-                    <div class="h-px w-12 bg-white/20"></div>
-                    <i class="bx bxs-star text-gold-400 text-xs"></i>
-                    <div class="h-px w-12 bg-white/20"></div>
+                <div class="flex items-center justify-center gap-6">
+                    <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-gold-400/50"></div>
+                    <i class="bx bxs-crown text-gold-400 text-lg"></i>
+                    <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-gold-400/50"></div>
                 </div>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-4 mb-16">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-12 lg:mb-16">
                 <button type="button" onclick="filtrarPaquetes('all')"
-    class="filter-btn active group relative px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 bg-gold-metallic border border-gold-300/20 text-royal-900 hover:border-gold-400 hover:text-royal-900"
+                    class="filter-btn group relative px-6 py-3 md:px-10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border border-gold-400/30 text-gold-400 hover:bg-gold-400 hover:text-royal-900 active"
                     data-filter="all">
-                    <span class="relative z-10 text-x-small lg:text-xl md:text-l group-hover:font-bold">Ver Todos</span>
-                    <div
-        class="absolute inset-0 bg-gold-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out">
-                    </div>
+                    <span class="relative z-10">Ver Todos</span>
                 </button>
 
                 <button type="button" onclick="filtrarPaquetes('grand')"
-    class="filter-btn group relative px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 bg-gold-metallic border border-gold-300/20 text-royal-900 hover:border-gold-400 hover:text-royal-900"
+                    class="filter-btn group relative px-6 py-3 md:px-10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border border-gold-400/30 text-gold-400 hover:bg-gold-400 hover:text-royal-900"
                     data-filter="grand">
-                    <span class="relative z-10 text-x-small lg:text-xl md:text-l">Grandes Eventos</span>
-                    <div
-        class="absolute inset-0 bg-gold-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out">
-                    </div>
+                    <span class="relative z-10">Grandes Eventos</span>
                 </button>
 
                 <button type="button" onclick="filtrarPaquetes('boutique')"
-    class="filter-btn group relative px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 bg-gold-metallic border border-gold-300/20 text-royal-900 hover:border-gold-400 hover:text-royal-900"
+                    class="filter-btn group relative px-6 py-3 md:px-10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border border-gold-400/30 text-gold-400 hover:bg-gold-400 hover:text-royal-900"
                     data-filter="boutique">
-                    <span class="relative z-10 text-x-small lg:text-xl md:text-l">Boutique</span>
-                    <div
-        class="absolute inset-0 bg-gold-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out">
-                    </div>
+                    <span class="relative z-10">Boutique</span>
                 </button>
             </div>
 
-            <div class="relative w-full max-w-6xl mx-auto">
-                <div
-    class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-royal-900/80 blur opacity-50">
-                </div>
+            <div class="relative w-full max-w-6xl mx-auto group">
+                <div class="absolute -inset-1 rounded-[2rem] bg-gold-400/20 blur opacity-0 group-hover:opacity-100 transition duration-1000"></div>
 
                 <div id="slider-container"
-    class="relative bg-gold-metallic rounded-2xl overflow-hidden shadow-2xl shadow-gold-300/10 min-h-screen lg:min-h-[450px] flex items-stretch border border-gold-500">
+                    class="relative min-h-[600px] md:min-h-[500px] lg:min-h-[480px] w-full bg-[#0d1b2a] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 flex items-stretch">
+                    </div>
+
+                <div class="hidden lg:block">
+                    <button onclick="prevSlide()" class="absolute -left-16 top-1/2 -translate-y-1/2 text-white/30 hover:text-gold-400 transition-all text-4xl">
+                        <i class="bx bx-chevron-left"></i>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute -right-16 top-1/2 -translate-y-1/2 text-white/30 hover:text-gold-400 transition-all text-4xl">
+                        <i class="bx bx-chevron-right"></i>
+                    </button>
                 </div>
             </div>
 
-            <div id="dots-container" class="flex justify-center gap-4 mt-10"></div>
+            <div id="dots-container" class="flex justify-center gap-3 mt-12">
+                </div>
         </div>
     </section>
 
+    <style>
+        /* Estilo para el botón activo del filtro */
+        .filter-btn.active {
+            background-color: #d4af37; /* Gold Metallic */
+            color: #0a192f; /* Royal Metallic */
+            box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbar personalizada para la lista de items en el slider */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 10px;
+        }
+    </style>
     <section id="cotizador" class="py-24 bg-slate-50 relative overflow-hidden">
         <div
             class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-400/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none">
