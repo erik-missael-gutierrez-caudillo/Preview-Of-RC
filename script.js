@@ -1152,24 +1152,27 @@ function toggleFaq(button) {
   const answer = item.querySelector('.faq-answer');
   const icon = button.querySelector('i');
   
-  // Close others
+  // Cerrar todos los demás para un efecto acordeón limpio
   document.querySelectorAll('.faq-item').forEach(other => {
     if (other !== item) {
-      other.querySelector('.faq-answer').style.maxHeight = '0';
-      other.querySelector('i').classList.remove('rotate-180');
-      other.classList.remove('border-gold-400/50');
+      const otherAnswer = other.querySelector('.faq-answer');
+      const otherIcon = other.querySelector('i');
+      if (otherAnswer) otherAnswer.style.maxHeight = '0';
+      if (otherIcon) otherIcon.classList.remove('rotate-180');
+      other.classList.remove('active-faq');
     }
   });
 
-  // Toggle current
-  if (answer.style.maxHeight === '0px' || !answer.style.maxHeight) {
-    answer.style.maxHeight = answer.scrollHeight + 'px';
-    icon.classList.add('rotate-180');
-    item.classList.add('border-gold-400/50');
-  } else {
+  // Alternar el actual
+  const isOpen = item.classList.contains('active-faq');
+  if (isOpen) {
     answer.style.maxHeight = '0';
     icon.classList.remove('rotate-180');
-    item.classList.remove('border-gold-400/50');
+    item.classList.remove('active-faq');
+  } else {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    icon.classList.add('rotate-180');
+    item.classList.add('active-faq');
   }
 }
 
