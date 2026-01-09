@@ -97,7 +97,13 @@ const LEAD_AGGRESSIVE_THRESHOLD = 50;
 /* ===========================
    3. UI: Slider
    =========================== */
-let estado = { filtroActual: 'all', paquetesVisibles: [...paquetes], indiceActual: 0, intervaloAuto: null };
+let estado = { 
+  filtroActual: 'all', 
+  paquetesVisibles: [...paquetes], 
+  indiceActual: 0, 
+  intervaloAuto: null 
+};
+
 const contenedorSlider = document.getElementById('slider-container');
 const contenedorPuntos = document.getElementById('dots-container');
 
@@ -107,122 +113,162 @@ function iniciar() {
   iniciarAutoplay();
 }
 
+/**
+* Filtra los paquetes y actualiza visualmente los botones
+*/
 function filtrarPaquetes(filtro) {
   estado.filtroActual = filtro;
   estado.indiceActual = 0;
   estado.paquetesVisibles = filtro === 'all' ? [...paquetes] : paquetes.filter(p => p.categoria === filtro);
+
+  // Actualización de clases de botones (UI refinada)
   document.querySelectorAll('.filter-btn').forEach(btn => {
-    if (btn.dataset.filter === filtro) {
-      btn.classList.add('bg-royal-metallic', 'text-white', 'active', 'shadow-lg');
-      btn.classList.remove('bg-white', 'text-royal-900', 'border-royal-200');
-    } else {
-      btn.classList.remove('bg-royal-metallic', 'text-white', 'active', 'shadow-lg');
-      btn.classList.add('bg-white', 'text-royal-900', 'border-royal-200');
-    }
+      if (btn.dataset.filter === filtro) {
+          btn.classList.add('active'); // La clase .active ahora maneja los colores oro/royal en el CSS que te envié
+      } else {
+          btn.classList.remove('active');
+      }
   });
+
   renderizarPuntos();
   mostrarPaquete(0, 'fade');
   reiniciarAutoplay();
 }
 
+/**
+* Renderiza los indicadores inferiores (dots)
+*/
 function renderizarPuntos() {
   if (!contenedorPuntos) return;
   contenedorPuntos.innerHTML = estado.paquetesVisibles.map((_, idx) => `
-    <button aria-label="Ir al slide ${idx + 1}" onclick="clickPunto(${idx})"
-            class="w-3 h-3 rounded-full transition-colors duration-300 ${idx === estado.indiceActual ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/70'}">
-    </button>
+      <button aria-label="Ir al slide ${idx + 1}" onclick="clickPunto(${idx})"
+              class="group relative w-10 h-2 transition-all duration-500 rounded-full overflow-hidden">
+          <div class="absolute inset-0 bg-white/20"></div>
+          <div class="absolute inset-0 bg-gold-400 transition-transform duration-700 origin-left ${idx === estado.indiceActual ? 'scale-x-100' : 'scale-x-0'}"></div>
+      </button>
   `).join('');
 }
 
 function clickPunto(idx) {
+  if(idx === estado.indiceActual) return; // Evitar animar si ya estamos ahí
   estado.indiceActual = idx;
   mostrarPaquete(idx, 'slide');
   renderizarPuntos();
   reiniciarAutoplay();
 }
 
+/**
+* Inyecta el HTML y ejecuta la animación de entrada
+*/
 function mostrarPaquete(idx, tipoAnimacion) {
   const pkg = estado.paquetesVisibles[idx];
   if (!pkg || !contenedorSlider) return;
+
+  // Construcción de lista de items con iconos dorados
   const listaItems = pkg.items.map(itemId => {
-    const itemData = inventoryPaquetes.find(inv => inv.id === itemId);
-    return itemData ? `<li class="flex items-center text-sm"><i class='bx ${itemData.img} text-gold-400 mr-2 text-lg'></i> ${itemData.name}</li>` : '';
+      const itemData = inventoryPaquetes.find(inv => inv.id === itemId);
+      return itemData ? `
+          <li class="flex items-center gap-3 text-sm text-slate-200 group/item">
+              <div class="w-6 h-6 flex items-center justify-center rounded-lg bg-gold-400/10 text-gold-400 group-hover/item:bg-gold-400 group-hover/item:text-royal-900 transition-colors duration-300">
+                  <i class='bx ${itemData.img}'></i>
+              </div>
+              <span class="font-light tracking-wide">${itemData.name}</span>
+          </li>` : '';
   }).join('');
+
+  // Template del Slide (Tu estructura optimizada)
   const htmlSlide = `
-  <div class="slide-content w-full min-h-full lg:h-[480px] flex flex-col lg:flex-row items-center justify-center lg:justify-between p-6 md:p-12 lg:p-16 gap-8 relative overflow-hidden border border-gold-400/30 bg-gradient-to-br from-royal-900 via-royal-800 to-royal-900 rounded-3xl">
-  
-  <div class="absolute top-0 right-0 w-64 h-64 bg-gold-400/10 rounded-full blur-[80px] -mr-32 -mt-32"></div>
-  <div class="absolute bottom-0 left-0 w-48 h-48 bg-royal-400/20 rounded-full blur-[60px] -ml-24 -mb-24"></div>
+  <div class="slide-content w-full min-h-full lg:h-[480px] flex flex-col lg:flex-row items-center justify-center lg:justify-between p-6 md:p-12 lg:p-16 gap-8 relative overflow-hidden bg-gradient-to-br from-[#0a192f] via-[#0d1b2a] to-[#0a192f]">
 
-  <div class="w-full lg:w-1/2 text-white z-10 space-y-4 md:space-y-6">
-    <div class="inline-flex items-center gap-2 px-3 py-1 bg-gold-400/10 border border-gold-400/50 rounded-full">
-        <i class="bx bx-group text-gold-400 text-xs"></i>
-        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-gold-400">Capacidad: ${pkg.pax} Personas</span>
-    </div>
+      <div class="absolute top-0 right-0 w-64 h-64 bg-gold-400/10 rounded-full blur-[80px] -mr-32 -mt-32"></div>
+      <div class="absolute bottom-0 left-0 w-48 h-48 bg-royal-400/20 rounded-full blur-[60px] -ml-24 -mb-24"></div>
 
-    <h3 class="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-none tracking-tight">
-        ${pkg.titulo.split(' ')[0]} <span class="text-gold-400 block lg:inline">${pkg.titulo.split(' ').slice(1).join(' ')}</span>
-    </h3>
+      <div class="w-full lg:w-1/2 text-white z-10 space-y-4 md:space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-gold-400/10 border border-gold-400/50 rounded-full">
+              <i class="bx bx-group text-gold-400 text-xs"></i>
+              <span class="text-[10px] font-black uppercase tracking-[0.2em] text-gold-400">Capacidad: ${pkg.pax} Personas</span>
+          </div>
 
-    <p class="text-sm md:text-base text-slate-300 font-light italic border-l-2 border-gold-400/60 pl-4 max-w-md leading-relaxed">
-        "${pkg.desc}"
-    </p>
+          <h3 class="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight tracking-tight">
+              ${pkg.titulo.split(' ')[0]} <span class="text-gold-400 block lg:inline">${pkg.titulo.split(' ').slice(1).join(' ')}</span>
+          </h3>
 
-    <div class="flex flex-col sm:flex-row sm:items-center gap-6 pt-4">
-        <div class="flex flex-col">
-            <span class="text-[10px] uppercase text-gold-400/70 tracking-widest font-bold">Inversión</span>
-            <div class="flex items-baseline gap-1">
-                <span class="text-3xl md:text-4xl font-bold text-white">$${formatMoney(pkg.precio)}</span>
-                <span class="text-xs text-slate-400 font-medium">MXN</span>
-            </div>
-        </div>
-        
-        <button onclick="botReservePackage(${pkg.id})" 
-            class="group relative overflow-hidden bg-gold-400 text-royal-900 px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-gold-400/20 font-black uppercase text-xs tracking-widest">
-            <span class="relative z-10 flex items-center gap-2">
-                Reservar Ahora <i class="bx bx-right-arrow-alt text-lg group-hover:translate-x-1 transition-transform"></i>
-            </span>
-        </button>
-    </div>
-  </div>
+          <p class="text-sm md:text-base text-slate-300 font-light italic border-l-2 border-gold-400/60 pl-4 max-w-md leading-relaxed">
+              "${pkg.desc}"
+          </p>
 
-  <div class="w-full lg:w-5/12 z-10">
-    <div class="bg-white/[0.03] backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 shadow-2xl relative group hover:border-gold-400/40 transition-colors duration-500">
-        <div class="absolute -top-3 -right-3 w-12 h-12 bg-royal-900 border border-gold-400 rounded-full flex items-center justify-center text-gold-400 shadow-lg">
-            <i class="bx bx-star text-xl animate-pulse"></i>
-        </div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-6 pt-4">
+              <div class="flex flex-col">
+                  <span class="text-[10px] uppercase text-gold-400/70 tracking-widest font-bold">Inversión</span>
+                  <div class="flex items-baseline gap-1">
+                      <span class="text-3xl md:text-4xl font-bold text-white">$${formatMoney(pkg.precio)}</span>
+                      <span class="text-xs text-slate-400 font-medium">MXN</span>
+                  </div>
+              </div>
 
-        <h4 class="text-white font-serif text-xl mb-6 flex items-center gap-3">
-            <span class="w-8 h-px bg-gold-400/50"></span>
-            Detalles del Set
-        </h4>
+              <button onclick="botReservePackage(${pkg.id})" 
+                  class="group relative overflow-hidden bg-gold-400 text-royal-900 px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-gold-400/20 font-black uppercase text-[10px] tracking-widest">
+                  <span class="relative z-10 flex items-center gap-2">
+                      Reservar Ahora <i class="bx bx-right-arrow-alt text-lg group-hover:translate-x-1 transition-transform"></i>
+                  </span>
+              </button>
+          </div>
+      </div>
 
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 overflow-y-auto max-h-[200px] lg:max-h-none pr-2 custom-scrollbar">
-            ${listaItems}
-        </ul>
-    </div>
-  </div>
-</div>`;
+      <div class="w-full lg:w-5/12 z-10">
+          <div class="bg-white/[0.03] backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 shadow-2xl relative group hover:border-gold-400/40 transition-colors duration-500">
+              <div class="absolute -top-3 -right-3 w-12 h-12 bg-royal-900 border border-gold-400 rounded-full flex items-center justify-center text-gold-400 shadow-lg">
+                  <i class="bx bx-star text-xl"></i>
+              </div>
+              <h4 class="text-white font-serif text-xl mb-6 flex items-center gap-3">
+                  <span class="w-8 h-px bg-gold-400/50"></span>
+                  Detalles del Set
+              </h4>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 overflow-y-auto max-h-[250px] lg:max-h-none pr-2 custom-scrollbar">
+                  ${listaItems}
+              </ul>
+          </div>
+      </div>
+  </div>`;
+
   contenedorSlider.innerHTML = htmlSlide;
   const nuevoSlide = contenedorSlider.querySelector('.slide-content');
+
   if (!nuevoSlide) return;
+
+  // Lógica de Animaciones Web Animations API
   if (tipoAnimacion === 'slide') {
-    nuevoSlide.animate([{ transform: 'translateX(50px)', opacity: 0 }, { transform: 'translateX(0)', opacity: 1 }], { duration: 600, easing: 'cubic-bezier(0.25, 1, 0.5, 1)', fill: 'forwards' });
-  } else {
-    nuevoSlide.animate([{ opacity: 0, transform: 'scale(0.98)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 800, easing: 'ease-out', fill: 'forwards' });
+      nuevoSlide.animate([
+          { transform: 'translateX(30px)', opacity: 0 },
+          { transform: 'translateX(0)', opacity: 1 }
+      ], { duration: 600, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+  } else if (tipoAnimacion === 'fade') {
+      nuevoSlide.animate([
+          { opacity: 0, transform: 'scale(0.96)' },
+          { opacity: 1, transform: 'scale(1)' }
+      ], { duration: 700, easing: 'ease-out' });
   }
 }
 
 function iniciarAutoplay() {
-  if (estado.intervaloAuto) clearInterval(estado.intervaloAuto);
+  detenerAutoplay();
   estado.intervaloAuto = setInterval(() => {
-    let siguiente = estado.indiceActual + 1;
-    if (siguiente >= estado.paquetesVisibles.length) siguiente = 0;
-    clickPunto(siguiente);
-  }, 6000);
+      let siguiente = (estado.indiceActual + 1) % estado.paquetesVisibles.length;
+      clickPunto(siguiente);
+  }, 8000); // Aumentado a 8s para dar tiempo a leer los detalles
 }
-function reiniciarAutoplay() { clearInterval(estado.intervaloAuto); iniciarAutoplay(); }
 
+function detenerAutoplay() {
+  if (estado.intervaloAuto) clearInterval(estado.intervaloAuto);
+}
+
+function reiniciarAutoplay() { 
+  detenerAutoplay(); 
+  iniciarAutoplay(); 
+}
+
+// Iniciar al cargar
+document.addEventListener('DOMContentLoaded', iniciar);
 /* ===========================
    4. PRODUCTS & CART (fixed + improvements)
    =========================== */
