@@ -14,8 +14,8 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://unpkg.com/@popperjs/core@2"></script>
-  <script type="module" crossorigin src="/assets/index-znyYH0Wh.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CU0XmwJW.css">
+  <script type="module" crossorigin src="/assets/index-C0MNbEtn.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DGgQabVl.css">
 </head>
 
 <body class="antialiased font-sans">
@@ -149,7 +149,7 @@
     <header id="inicio" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-royal-900">
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-royal-900/90 via-royal-900/50 to-royal-900 z-10"></div>
-            <img src="/assets/rente%20confort%20(1)-BgLNWIjw-BgLNWIjw-BgLNWIjw-BgLNWIjw.png"
+            <img src="/assets/rente confort (1).png"
 class="w-full h-full object-cover animate-[pulse-slow_8s_infinite] scale-205 opacity-60"
                 alt="Boda de Lujo" />
         </div>
@@ -415,195 +415,118 @@ class="hero-description max-w-2xl mx-auto text-slate-300 text-base md:text-lg fo
         </div>
     </section>
 
-    <section id="paquetes" class="relative py-20 lg:py-32 bg-[#0a192f] overflow-hidden min-h-screen flex flex-col justify-center">
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute -top-24 -left-24 w-96 h-96 bg-gold-600/10 rounded-full blur-[120px]"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-royal-400/5 rounded-full blur-[150px]"></div>
-            <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold-400/10 rounded-full blur-[120px]"></div>
+    <!-- Sección de Paquetes (con Slider) -->
+    <section id="paquetes" class="py-24 bg-royal-900 relative overflow-hidden">
+        <div class="container mx-auto px-6 mb-16 text-center">
+            <h2 class="text-gold-400 text-xs font-bold uppercase tracking-[0.4em] mb-4">Experiencias Diseñadas</h2>
+            <h3 class="text-4xl md:text-5xl font-serif text-white mb-10">Colección de <span
+                    class="italic text-gold-metallic">Eventos Signature</span></h3>
+
+            <!-- Filtros Luxury -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button type="button" onclick="filtrarPaquetes('all')" data-filter="all"
+                    class="filter-btn active group relative px-8 py-3 rounded-full border border-white/10 text-white font-bold text-[10px] tracking-widest overflow-hidden transition-all hover:border-gold-400/50">
+                    <span>Todos</span>
+                </button>
+                <button type="button" onclick="filtrarPaquetes('grand')" data-filter="grand"
+                    class="filter-btn group relative px-8 py-3 rounded-full border border-white/10 text-white font-bold text-[10px] tracking-widest overflow-hidden transition-all hover:border-gold-400/50">
+                    <span>Grand Luxury</span>
+                </button>
+                <button type="button" onclick="filtrarPaquetes('medium')" data-filter="medium"
+                    class="filter-btn group relative px-8 py-3 rounded-full border border-white/10 text-white font-bold text-[10px] tracking-widest overflow-hidden transition-all hover:border-gold-400/50">
+                    <span>Exclusive</span>
+                </button>
+                <button type="button" onclick="filtrarPaquetes('boutique')" data-filter="boutique"
+                    class="filter-btn group relative px-8 py-3 rounded-full border border-white/10 text-white font-bold text-[10px] tracking-widest overflow-hidden transition-all hover:border-gold-400/50">
+                    <span>Boutique</span>
+                </button>
+            </div>
         </div>
 
-        <div class="container mx-auto px-4 md:px-6 relative z-10">
-            <div class="text-center mb-12 lg:mb-20">
-                <span class="inline-block text-gold-500 font-black tracking-[0.4em] text-[10px] uppercase mb-4 py-1 px-4 border-y border-gold-500/20">
-                    Soluciones Llave en Mano
-                </span>
-                <h2 class="text-4xl md:text-6xl font-serif text-white mb-6 tracking-tight">
-                    Colección <span class="text-gold-400 italic font-light">Exclusiva</span>
-                </h2>
-                <div class="flex items-center justify-center gap-6">
-                    <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-gold-400/50"></div>
-                    <i class="bx bxs-crown text-gold-400 text-lg"></i>
-                    <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-gold-400/50"></div>
-                </div>
+        <div class="paquetes-container">
+            <div id="slider-container" class="relative group">
+                <!-- El contenido se inyecta vía JS -->
             </div>
 
-            <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-12 lg:mb-16">
-                <button type="button" onclick="filtrarPaquetes('all')"
-                    class="filter-btn group relative px-6 py-3 md:px-10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border border-gold-400/30 text-gold-400 hover:bg-gold-400 hover:text-royal-900 active"
-                    data-filter="all">
-                    <span class="relative z-10">Ver Todos</span>
-                </button>
-
-                <button type="button" onclick="filtrarPaquetes('grand')"
-                    class="filter-btn group relative px-6 py-3 md:px-10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border border-gold-400/30 text-gold-400 hover:bg-gold-400 hover:text-royal-900"
-                    data-filter="grand">
-                    <span class="relative z-10">Grandes Eventos</span>
-                </button>
-
-                <button type="button" onclick="filtrarPaquetes('boutique')"
-                    class="filter-btn group relative px-6 py-3 md:px-10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border border-gold-400/30 text-gold-400 hover:bg-gold-400 hover:text-royal-900"
-                    data-filter="boutique">
-                    <span class="relative z-10">Boutique</span>
-                </button>
-            </div>
-
-            <div class="relative w-full max-w-6xl mx-auto group">
-                <div class="absolute -inset-1 rounded-[2rem] bg-gold-400/20 blur opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-
-                <div id="slider-container"
-                    class="relative min-h-[600px] md:min-h-[550px] lg:min-h-[480px] lg:w-full nin-w-screen bg-[#0d1b2a] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 flex items-stretch">
-                    </div>
-
-                <div class="hidden lg:block">
-                    <button onclick="prevSlide()" class="absolute -left-16 top-1/2 -translate-y-1/2 text-white/30 hover:text-gold-400 transition-all text-4xl">
-                        <i class="bx bx-chevron-left"></i>
-                    </button>
-                    <button onclick="nextSlide()" class="absolute -right-16 top-1/2 -translate-y-1/2 text-white/30 hover:text-gold-400 transition-all text-4xl">
-                        <i class="bx bx-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-
+            <!-- Indicadores (Dots) -->
             <div id="dots-container" class="flex justify-center gap-3 mt-12">
-                </div>
+                <!-- Se inyectan vía JS -->
+            </div>
         </div>
     </section>
 
-    <style>
-        /* Estilo para el botón activo del filtro */
-        .filter-btn.active {
-            background-color: #d4af37; /* Gold Metallic */
-            color: #0a192f; /* Royal Metallic */
-            box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Scrollbar personalizada para la lista de items en el slider */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #d4af37;
-            border-radius: 10px;
-        }
-    </style>
-    <section id="cotizador" class="py-24 bg-slate-50 relative overflow-hidden">
-        <div
-            class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-400/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none">
-        </div>
-
-        <div class="container mx-auto px-4 md:px-6 relative z-10">
-            <div class="text-center mb-12">
-                <span class="text-gold-500 font-bold tracking-[0.2em] text-xs uppercase mb-2 block">Personaliza tu
-                    Evento</span>
-                <h2 class="text-3xl md:text-5xl font-serif text-royal-900 mb-4">
-                    Diseña tu Experiencia
-                </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto"></div>
-            </div>
-
-            <div class="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto items-start">
-                <div class="w-full lg:w-2/3 order-2 lg:order-1">
-                    <div class="sticky top-0 z-20 bg-slate-50/95 backdrop-blur-md py-4 mb-6">
-                        <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-2 mask-linear-fade">
-                            <button type="button" onclick="filterProducts('all')"
-                class="cat-btn active group px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-royal-900 text-white shadow-lg shadow-royal-900/20 transition-all hover:-translate-y-0.5"
-                                data-cat="all">
-                                Todo
-                            </button>
-                            <button type="button" onclick="filterProducts('Carpas')"
-                class="cat-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-500 border border-slate-200 hover:border-gold-400 hover:text-royal-900 transition-all shadow-sm hover:shadow-md whitespace-nowrap"
-                                data-cat="Carpas">
-                                Carpas
-                            </button>
-                            <button type="button" onclick="filterProducts('Mobiliario')"
-                class="cat-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-500 border border-slate-200 hover:border-gold-400 hover:text-royal-900 transition-all shadow-sm hover:shadow-md whitespace-nowrap"
-                                data-cat="Mobiliario">
-                                Mobiliario
-                            </button>
-                            <button type="button" onclick="filterProducts('Mantelería')"
-                class="cat-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-500 border border-slate-200 hover:border-gold-400 hover:text-royal-900 transition-all shadow-sm hover:shadow-md whitespace-nowrap"
-                                data-cat="Mantelería">
-                                Mantelería
-                            </button>
-                            <button type="button" onclick="filterProducts('Extras')"
-                class="cat-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-500 border border-slate-200 hover:border-gold-400 hover:text-royal-900 transition-all shadow-sm hover:shadow-md whitespace-nowrap"
-                                data-cat="Extras">
-                                Extras
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="products-list" class="grid grid-cols-1 md:grid-cols-2 gap-5 pb-10 min-h-[400px]"></div>
-                </div>
-
-                <div class="w-full lg:w-1/3 order-2 lg:order-2">
-                    <div
-        class="sticky top-6 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-black/5 bg-royal-900 text-white">
-                        <div class="p-6 bg-royal-800 border-b border-white/5 flex justify-between items-center cursor-pointer lg:cursor-default"
-                            onclick="toggleCartMobile()">
-                            <div class="flex items-center gap-4">
-                                <div
-                    class="w-10 h-10 rounded-full bg-gold-400/20 flex items-center justify-center text-gold-400">
-                                    <i class="bx bx-notepad text-xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-serif tracking-wide text-white">
-                                        Tu Selección
-                                    </h3>
-                                    <p class="text-[10px] text-slate-400 uppercase tracking-wider"
-                                        id="item-count-label">
-                                        0 artículos
-                                    </p>
-                                </div>
-                            </div>
-                            <i class='bx bxs-chevron-down lg:hidden text-2xl transition-transform text-gold-400'
-                                id="cart-chevron" aria-hidden="true"></i>
-                        </div>
-
-                        <div id="cart-body"
-            class="cart-mobile transition-all duration-500 ease-in-out overflow-hidden max-h-auto lg:max-h-[900px] flex flex-col bg-royal-900 z-50 lg:z-auto">
-                            <div id="selected-items-container"
-                class="p-6 overflow-y-auto custom-scroll space-y-4 min-h-[150px] max-h-[300px]">
-                                <div
-                    class="flex flex-col items-center justify-center h-full py-8 text-center opacity-50">
-                                    <i class="bx bx-basket text-4xl mb-2 text-slate-500"></i>
-                                    <p class="text-sm text-slate-400 font-light italic">
-                                        Tu lista de deseos está vacía.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="p-6 bg-royal-950/50 border-t border-white/5 mt-auto">
-                                <div class="flex justify-between items-end mb-6">
-                                    <span class="text-xs uppercase tracking-[0.2em] text-gold-100/60 font-medium">Total
-                                        Estimado</span>
-                                    <span id="total-display" class="text-3xl font-serif text-gold-400">$0.00</span>
-                                </div>
-
-                                <button type="button" onclick="openChatWithCart()"
-                    class="group w-full bg-gradient-to-r from-gold-300 to-gold-500 text-royal-900 font-bold py-4 rounded-xl shadow-lg shadow-gold-400/20 hover:shadow-gold-400/30 hover:brightness-110 transition-all duration-300 flex items-center justify-center gap-3 text-xs uppercase tracking-widest transform active:scale-[0.98]">
-                                    <span>Solicitar Disponibilidad</span>
-                                    <i
-                        class="bx bxl-whatsapp text-xl group-hover:translate-x-1 transition-transform"></i>
-                                </button>
-                                <p class="text-[10px] text-center text-slate-500 mt-3 font-light">
-                                    Precios sujetos a cambio sin previo aviso.
+    <!-- Sección del Cotizador -->
+    <section id="cotizador" class="py-24 bg-cotizador relative">
+        <div class="absolute inset-0 bg-black/40 pointer-events-none"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Inventario -->
+                <div class="lg:w-2/3">
+                    <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 md:p-10">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+                            <div>
+                                <h2 class="text-3xl font-serif text-royal-900 font-bold mb-2">Catálogo Interactivo</h2>
+                                <p class="text-slate-500 text-sm tracking-wide">Selecciona los elementos para tu evento.
                                 </p>
                             </div>
+                            <!-- Filtros de Categoría -->
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" onclick="filterProducts('all')" data-cat="all"
+                                    class="cat-btn active bg-royal-900 text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg">Todos</button>
+                                <button type="button" onclick="filterProducts('Carpas')" data-cat="Carpas"
+                                    class="cat-btn bg-slate-100 text-slate-500 px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">Carpas</button>
+                                <button type="button" onclick="filterProducts('Mobiliario')" data-cat="Mobiliario"
+                                    class="cat-btn bg-slate-100 text-slate-500 px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">Mobiliario</button>
+                                <button type="button" onclick="filterProducts('Servicio')" data-cat="Servicio"
+                                    class="cat-btn bg-slate-100 text-slate-500 px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">Servicio</button>
+                            </div>
+                        </div>
+
+                        <div id="products-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scroll">
+                            <!-- Inyectado vía JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen / Carrito -->
+                <div class="lg:w-1/3">
+                    <div class="bg-royal-900/40 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden sticky top-32">
+                        <!-- Header del Carrito con Toggle para móvil -->
+                        <div class="p-6 border-b border-white/10 flex justify-between items-center cursor-pointer lg:cursor-default" onclick="toggleCartMobile()">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gold-400 rounded-full flex items-center justify-center text-royal-900 shadow-lg shadow-gold-400/20">
+                                    <i class="bx bx-cart-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-bold tracking-widest text-xs uppercase">Resumen de Cotización</h3>
+                                    <span id="item-count-label" class="text-[10px] text-gold-400 font-bold uppercase">0 artículos seleccionados</span>
+                                </div>
+                            </div>
+                            <i id="cart-chevron" class="bx bx-chevron-down text-2xl text-white lg:hidden"></i>
+                        </div>
+
+                        <!-- Body del Carrito -->
+                        <div id="cart-body" class="cart-mobile transition-all duration-300 overflow-hidden lg:max-h-none">
+                            <div class="p-6">
+                                <div id="selected-items-container" class="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scroll mb-8">
+                                    <!-- Inyectado vía JS -->
+                                </div>
+
+                                <div class="pt-6 border-t border-white/10 space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-slate-400 text-xs uppercase font-bold tracking-widest">Inversión Estimada</span>
+                                        <span id="total-display" class="text-2xl font-bold text-white">$0</span>
+                                    </div>
+                                    <p class="text-[9px] text-slate-500 italic text-center leading-relaxed">
+                                        * Precios sujetos a disponibilidad y flete según ubicación.
+                                    </p>
+                                    <button onclick="sendWhatsApp()"
+                                        class="w-full bg-gold-400 hover:bg-white text-royal-900 font-black py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-gold-400/10 uppercase text-xs tracking-widest transform active:scale-[0.98]">
+                                        <i class="bx bxl-whatsapp text-2xl"></i>
+                                        Validar con Asesor VIP
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -611,107 +534,134 @@ class="hero-description max-w-2xl mx-auto text-slate-300 text-base md:text-lg fo
         </div>
     </section>
 
-    <section id="opiniones" class="py-20 bg-white-metallic border-t border-slate-200">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-end mb-10 px-2">
-                <div>
-                    <span class="text-gold-500 font-bold tracking-wider text-xs uppercase mb-2 block">Testimonios</span>
-                    <h2 class="text-4xl font-serif text-royal-900">
-                        Voces de nuestros clientes
-                    </h2>
+    <!-- Social Proof / Feed (Placeholder Estético) -->
+    <section id="experiencias" class="py-24 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+                <div class="reveal">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-[0.4em] mb-4">Social Proof</h2>
+                    <h3 class="text-4xl md:text-5xl font-serif text-royal-900">Nuestra comunidad <br /> <span class="italic text-gold-600">exclusiva.</span></h3>
                 </div>
-                <div class="hidden md:flex gap-3">
-                    <button title="Desplazar a la izquierda" type="button" onclick="manualScroll('left')"
-        class="w-12 h-12 rounded-full bg-white shadow-md border border-slate-100 text-slate-600 flex items-center justify-center hover:bg-gold-500 hover:text-white transition-all transform hover:scale-110">
-                        <i class="bx bx-left-arrow-alt text-xl"></i>
+                <button type="button" onclick="openReviewModal()" class="px-8 py-4 bg-royal-900 text-white font-bold text-[10px] tracking-widest uppercase hover:bg-gold-500 transition-colors">Compartir mi experiencia</button>
+            </div>
+
+            <!-- Carrusel de Comentarios Dinámico -->
+            <div class="relative">
+                <div id="reviews-container" class="comments-wrapper scrollbar-hide">
+                    <!-- Los comentarios se inyectan dinámicamente vía script.js -->
+                </div>
+                
+                <!-- Controles del Slider -->
+                <div class="flex justify-center gap-4 mt-8">
+                    <button onclick="manualScroll('left')" class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-royal-900 hover:bg-royal-900 hover:text-white transition-all shadow-sm">
+                        <i class="bx bx-left-arrow-alt text-2xl"></i>
                     </button>
-                    <button title="Desplazar a la derecha" type="button" onclick="manualScroll('right')"
-        class="w-12 h-12 rounded-full bg-white shadow-md border border-slate-100 text-slate-600 flex items-center justify-center hover:bg-gold-500 hover:text-white transition-all transform hover:scale-110">
-                        <i class="bx bx-right-arrow-alt text-xl"></i>
+                    <button onclick="manualScroll('right')" class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-royal-900 hover:bg-royal-900 hover:text-white transition-all shadow-sm">
+                        <i class="bx bx-right-arrow-alt text-2xl"></i>
                     </button>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="comments-wrapper" id="reviews-container" onmouseenter="pauseAutoScroll()"
-                onmouseleave="startAutoScroll()" ontouchstart="pauseAutoScroll()" ontouchend="startAutoScroll()"></div>
-
-            <div class="max-w-xl mx-auto mt-12 text-center">
-                <button type="button"
-                    onclick="document.getElementById('new-review-modal').classList.remove('hidden'); pauseAutoScroll();"
-    class="group relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-200 bg-royal-900 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gold-500">
-                    <i class="bx bx-message-square-add mr-2 text-lg"></i> Compartir mi
-                    experiencia
-                    <div
-        class="absolute -inset-3 rounded-xl bg-gold-400 opacity-20 group-hover:opacity-40 blur-lg transition duration-200">
+    <!-- Nueva Sección de Ubicación -->
+    <section id="ubicacion" class="relative py-24 bg-slate-50 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 reveal">
+                    <h2 class="text-xs font-bold text-gold-600 uppercase tracking-[0.4em] mb-4">Showroom & Logística</h2>
+                    <h3 class="text-4xl md:text-5xl font-serif text-royal-900 mb-8 leading-tight">Visítanos en el corazón <br/><span class="italic text-gold-metallic">del Bajío.</span></h3>
+                    
+                    <div class="space-y-8 mb-10">
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-12 h-12 bg-white rounded-2xl shadow-lg flex items-center justify-center text-royal-900 group-hover:bg-gold-400 transition-all">
+                                <i class="bx bx-map-pin text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-royal-900 uppercase text-xs tracking-widest mb-1">Ubicación Estratégica</h4>
+                                <p class="text-slate-600 text-sm">León, Guanajuato, México. <br/> Cobertura en toda la región del Bajío.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-12 h-12 bg-white rounded-2xl shadow-lg flex items-center justify-center text-royal-900 group-hover:bg-gold-400 transition-all">
+                                <i class="bx bx-time-five text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-royal-900 uppercase text-xs tracking-widest mb-1">Horario de Atención</h4>
+                                <p class="text-slate-600 text-sm">Lunes a Viernes: 9:00 AM - 6:00 PM <br/> Sábados: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
                     </div>
-                </button>
+                    
+                    <div class="flex gap-4">
+                        <a href="https://maps.google.com" target="_blank" class="px-8 py-4 bg-royal-900 text-white font-bold text-[10px] tracking-widest uppercase flex items-center gap-2 hover:bg-gold-400 hover:text-royal-900 transition-all rounded-lg">
+                            <i class="bx bx-navigation"></i> Abrir en Google Maps
+                        </a>
+                        <a href="https://waze.com" target="_blank" class="px-8 py-4 border border-slate-300 text-royal-900 font-bold text-[10px] tracking-widest uppercase flex items-center gap-2 hover:bg-slate-100 transition-all rounded-lg">
+                            <i class="bx bxl-waze text-xl"></i> Waze
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white reveal relative group">
+                    <!-- Simulación de Mapa Luxury -->
+                    <div class="absolute inset-0 bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover opacity-80" alt="Mapa de Ubicación"/>
+                        <div class="absolute inset-0 bg-royal-900/10"></div>
+                        <div class="absolute w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center shadow-2xl animate-bounce">
+                            <i class="bx bxs-map text-white text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Sección FAQ -->
-    <section id="faq" class="py-24 bg-royal-900 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 pointer-events-none bg-pattern"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center gap-4 mb-4">
-                    <span class="w-8 h-[1px] bg-gold-400"></span>
-                    <span class="text-[10px] md:text-xs uppercase tracking-[0.4em] text-gold-400 font-bold">Resolviendo dudas</span>
-                    <span class="w-8 h-[1px] bg-gold-400"></span>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-serif text-white mb-4">Preguntas Frecuentes</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">Todo lo que necesitas saber para que tu evento sea perfecto y sin complicaciones.</p>
+    <section id="faq" class="py-24 bg-royal-950 relative overflow-hidden">
+        <div class="container mx-auto px-6 max-w-4xl relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-xs font-bold text-gold-400 uppercase tracking-[0.4em] mb-4">Preguntas Frecuentes</h2>
+                <h3 class="text-4xl md:text-5xl font-serif text-white">Resolviendo tus <span class="italic text-gold-metallic">dudas.</span></h3>
             </div>
 
-            <div class="max-w-3xl mx-auto space-y-4">
-                <!-- Pregunta 1 -->
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
                 <div class="faq-item border border-white/10 rounded-2xl bg-white/5 overflow-hidden transition-all duration-300 hover:border-gold-400/30">
-                    <button class="w-full px-8 py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-white font-medium pr-4 group-hover:text-gold-400 transition-colors">¿Con cuánta anticipación debo reservar?</span>
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex justify-between items-center group">
+                        <span class="text-lg font-medium text-white group-hover:text-gold-400 transition-colors">¿Con cuánta anticipación debo reservar?</span>
                         <i class="bx bx-chevron-down text-2xl text-gold-400 transition-transform duration-300"></i>
                     </button>
-                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <div class="px-8 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                            Recomendamos reservar con al menos 2 a 4 semanas de anticipación para eventos pequeños, y de 3 a 6 meses para bodas o eventos masivos, asegurando así la disponibilidad de nuestro inventario premium.
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="px-8 pb-6 text-slate-400 leading-relaxed">
+                            Recomendamos reservar con al menos 3 a 6 meses de anticipación para eventos grandes como bodas, especialmente en temporadas altas. Para eventos pequeños, 2 semanas pueden ser suficientes según disponibilidad.
                         </div>
                     </div>
                 </div>
 
-                <!-- Pregunta 2 -->
+                <!-- FAQ Item 2 -->
                 <div class="faq-item border border-white/10 rounded-2xl bg-white/5 overflow-hidden transition-all duration-300 hover:border-gold-400/30">
-                    <button class="w-full px-8 py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-white font-medium pr-4 group-hover:text-gold-400 transition-colors">¿Qué incluye el servicio de renta?</span>
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex justify-between items-center group">
+                        <span class="text-lg font-medium text-white group-hover:text-gold-400 transition-colors">¿Tienen servicio fuera de León?</span>
                         <i class="bx bx-chevron-down text-2xl text-gold-400 transition-transform duration-300"></i>
                     </button>
-                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <div class="px-8 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                            Nuestro servicio integral incluye la entrega, montaje especializado por personal capacitado, desmontaje y retiro del equipo. Nos encargamos de toda la logística para que tú solo disfrutes el momento.
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="px-8 pb-6 text-slate-400 leading-relaxed">
+                            Sí, cubrimos toda la zona del Bajío (Guanajuato, Querétaro, San Miguel de Allende). El costo de flete varía según la ubicación y el volumen del equipo.
                         </div>
                     </div>
                 </div>
 
-                <!-- Pregunta 3 -->
+                <!-- FAQ Item 3 -->
                 <div class="faq-item border border-white/10 rounded-2xl bg-white/5 overflow-hidden transition-all duration-300 hover:border-gold-400/30">
-                    <button class="w-full px-8 py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-white font-medium pr-4 group-hover:text-gold-400 transition-colors">¿Tienen cobertura fuera de León?</span>
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex justify-between items-center group">
+                        <span class="text-lg font-medium text-white group-hover:text-gold-400 transition-colors">¿Qué pasa si llueve y renté una carpa?</span>
                         <i class="bx bx-chevron-down text-2xl text-gold-400 transition-transform duration-300"></i>
                     </button>
-                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <div class="px-8 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                            Sí, aunque nuestra base principal está en León, Gto., brindamos servicio a zonas aledañas en el Bajío. Los costos de flete varían según la distancia y el volumen del equipo solicitado.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pregunta 4 -->
-                <div class="faq-item border border-white/10 rounded-2xl bg-white/5 overflow-hidden transition-all duration-300 hover:border-gold-400/30">
-                    <button class="w-full px-8 py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-white font-medium pr-4 group-hover:text-gold-400 transition-colors">¿Cómo funcionan los depósitos de garantía?</span>
-                        <i class="bx bx-chevron-down text-2xl text-gold-400 transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <div class="px-8 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                            Solicitamos un depósito reembolsable para cubrir posibles daños menores o extravíos. Una vez recolectado el equipo y verificado su estado, el reembolso se procesa de forma inmediata.
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="px-8 pb-6 text-slate-400 leading-relaxed">
+                            Nuestras carpas estructurales están diseñadas para resistir vientos y lluvias moderadas a fuertes. Contamos con sistema de canaleteo profesional para evitar filtraciones y garantizar que tu evento siga adelante sin problemas.
                         </div>
                     </div>
                 </div>
@@ -719,213 +669,157 @@ class="hero-description max-w-2xl mx-auto text-slate-300 text-base md:text-lg fo
         </div>
     </section>
 
-    <!-- Espaciador para separar del footer -->
-    <div class="py-12 bg-royal-900"></div>
-
-    <div class="bg-gray-50 relative font-sans pb-10"> <footer class="relative mt-32">
-
-            <div class="absolute -top-20 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:max-w-5xl z-30">
-                <div class="bg-gradient-to-r from-[#b8860b] via-[#d4af37] to-[#b8860b] rounded-3xl shadow-[0_20px_50px_-12px_rgba(184,134,11,0.3)] p-[1px]">
-                    <div class="bg-royal-900/95 backdrop-blur-xl rounded-[23px] px-6 py-8 md:px-12 md:py-10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-gold-400/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-
-                        <div class="relative z-10 text-center md:text-left">
-                            <h3 class="text-2xl md:text-3xl font-serif text-white mb-2">
-                                Inspírate <span class="text-gold-400 italic font-light">&</span> Conecta
-                            </h3>
-                            <p class="text-slate-400 text-sm tracking-wide">Síguenos para ver montajes exclusivos.</p>
-                        </div>
-
-                        <div class="flex gap-3 md:gap-4 relative z-10">
-                            <a href="#" class="group w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-400 hover:bg-gold-400 hover:text-royal-900 hover:scale-110 hover:-rotate-6 transition-all duration-300 shadow-lg">
-                                <i class="bx bxl-instagram text-2xl"></i>
-                            </a>
-                            <a href="#" class="group w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-400 hover:bg-gold-400 hover:text-royal-900 hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-lg">
-                                <i class="bx bxl-facebook text-2xl"></i>
-                            </a>
-                            <a href="#" class="group w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-400 hover:bg-gold-400 hover:text-royal-900 hover:scale-110 hover:-rotate-6 transition-all duration-300 shadow-lg">
-                                <i class="bx bxl-pinterest text-2xl"></i>
-                            </a>
-                             <a href="#" class="group w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-400 hover:bg-gold-400 hover:text-royal-900 hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-lg">
-                                <i class="bx bxl-tiktok text-2xl"></i>
-                            </a>
-                        </div>
+    <footer class="bg-royal-950 text-white pt-20 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+                <div class="space-y-6">
+                    <h1 class="text-2xl font-serif font-bold tracking-widest">
+                        Rente<span class="text-gold-400"> Confort</span>
+                    </h1>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Líderes en arquitectura de eventos y mobiliario de alta gama en el Bajío. Creamos legados, un
+                        evento a la vez.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="social-item"><a href="#" class="group">
+                            <i class="bx bxl-facebook icon-social-media group-hover:text-gold-400"></i>
+                        </a></div>
+                        <div class="social-item"><a href="#" class="group">
+                            <i class="bx bxl-instagram icon-social-media group-hover:text-gold-400"></i>
+                        </a></div>
+                        <div class="social-item"><a href="#" class="group">
+                            <i class="bx bxl-whatsapp icon-social-media group-hover:text-gold-400"></i>
+                        </a></div>
                     </div>
+                </div>
+
+                <div>
+                    <h4 class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-8">Navegación</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#inicio" class="text-slate-400 hover:text-white transition-colors text-sm">Inicio</a>
+                        </li>
+                        <li><a href="#paquetes"
+                                class="text-slate-400 hover:text-white transition-colors text-sm">Colección Signature</a>
+                        </li>
+                        <li><a href="#cotizador"
+                                class="text-slate-400 hover:text-white transition-colors text-sm">Cotizador Express</a>
+                        </li>
+                        <li><a href="#ubicacion" class="text-slate-400 hover:text-white transition-colors text-sm">Ubicación</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-8">Servicios</h4>
+                    <ul class="space-y-4">
+                        <li><span class="text-slate-400 text-sm">Carpas Estructurales</span></li>
+                        <li><span class="text-slate-400 text-sm">Mobiliario de Autor</span></li>
+                        <li><span class="text-slate-400 text-sm">Iluminación Arquitectónica</span></li>
+                        <li><span class="text-slate-400 text-sm">Vajilla y Cristalería Gold</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-8">Newsletter</h4>
+                    <p class="text-slate-400 text-xs mb-6">Únete a nuestra lista VIP y recibe tendencias exclusivas.</p>
+                    <form class="relative">
+                        <input type="email" placeholder="Email VIP"
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-xs focus:border-gold-400 outline-none transition-all" />
+                        <button type="submit"
+                            class="absolute right-2 top-2 h-8 w-8 bg-gold-400 text-royal-900 rounded flex items-center justify-center hover:bg-white transition-colors">
+                            <i class="bx bx-right-arrow-alt text-xl"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
 
-            <div class="bg-royal-metallic pt-32 pb-12 px-6 relative overflow-hidden rounded-t-[3rem] md:rounded-t-[5rem]">
-
-                <div class="absolute top-20 left-0 w-full overflow-hidden opacity-[0.03] pointer-events-none select-none">
-                    <span class="text-[15vw] font-serif font-bold text-white whitespace-nowrap leading-none">RENTE CONFORT</span>
-                </div>
-
-                <div class="container mx-auto relative z-10">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-
-                        <div class="lg:col-span-4 flex flex-col justify-between h-full">
-                            <div>
-                                <div class="flex items-center gap-3 mb-8">
-                                    <div class="w-10 h-10 bg-gradient-to-tr from-yellow-600 to-yellow-400 rounded-lg flex items-center justify-center shadow-lg shadow-yellow-500/20">
-                                        <span class="font-serif text-royal-900 font-bold text-xl">R</span>
-                                    </div>
-                                    <h3 class="font-serif text-2xl text-white tracking-[0.2em]">RENTE<span class="text-gold-400">CONFORT</span></h3>
-                                </div>
-
-                                <p class="text-slate-400 text-sm leading-7 mb-8 border-l-2 border-gold-400/30 pl-6">
-                                    Redefiniendo el estándar en el Bajío. No solo rentamos mobiliario, creamos la atmósfera donde suceden tus mejores recuerdos.
-                                </p>
-                            </div>
-
-                            <div class="hidden lg:flex flex-col gap-2 text-[10px] text-slate-500 uppercase tracking-widest">
-                                <a href="#" class="hover:text-gold-400 transition-colors w-max">Términos y Condiciones</a>
-                                <a href="#" class="hover:text-gold-400 transition-colors w-max">Aviso de Privacidad</a>
-                                <span class="mt-2">© 2026 Rente Confort.</span>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                            <div class="bg-white/5 border border-white/10 rounded-3xl p-2 hover:border-gold-400/50 transition-colors duration-500 group">
-                                <div class="w-full h-40 md:h-full min-h-[200px] rounded-2xl overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
-                                    <iframe title="Mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.944293994326!2d-101.6660142249557!3d21.11477798055627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf61e3300001%3A0x123456789!2sCalle%20Tallin%20145%2C%20Agua%20Azul%2C%2037250%20Le%C3%B3n%2C%20Gto.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" width="100%" height="100%" class="absolute inset-0" loading="lazy"></iframe>
-                                    <div class="absolute bottom-3 left-3 bg-royal-900/90 backdrop-blur px-4 py-2 rounded-lg border border-white/10">
-                                        <p class="text-xs text-gold-400 font-bold uppercase tracking-wider">Showroom</p>
-                                        <p class="text-[10px] text-white">Agua Azul, León, Gto.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4">
-
-                                <a href="tel:+524778217435" class="col-span-2 bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-gold-400 hover:text-royal-900 group transition-all duration-300 cursor-pointer">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <i class="bx bx-phone text-3xl text-gold-400 group-hover:text-royal-900 transition-colors"></i>
-                                        <i class="bx bx-right-arrow-alt -rotate-45 text-xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                                    </div>
-                                    <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1">Llámanos ahora</p>
-                                    <p class="text-lg font-bold text-white group-hover:text-royal-900">477 821 7435</p>
-                                </a>
-
-                                <a href="mailto:concierge@renteconfort.mx" class="col-span-2 sm:col-span-1 bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-gold-400/50 transition-all duration-300 group">
-                                    <i class="bx bx-envelope text-2xl text-gold-400 mb-3 group-hover:scale-110 block w-max transition-transform"></i>
-                                    <p class="text-[9px] uppercase tracking-widest text-slate-400 mb-1">Concierge</p>
-                                    <p class="text-xs text-white truncate">concierge@...</p>
-                                </a>
-
-                                <div class="col-span-2 sm:col-span-1 bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-6 relative overflow-hidden">
-                                    <div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
-                                    <p class="text-[9px] uppercase tracking-widest text-gold-400 mb-1">Hoy</p>
-                                    <p class="text-sm font-bold text-white">Abierto hasta 7pm</p>
-                                    <p class="text-[9px] text-slate-400 mt-1">Sab: 9am - 2pm</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-12 pt-8 border-t border-white/5 lg:hidden text-center">
-                        <div class="flex flex-col gap-4 text-[10px] text-slate-500 uppercase tracking-widest">
-                            <span class="text-white/20">© 2026 Rente Confort</span>
-                            <div class="flex justify-center gap-6">
-                                <a href="#">Privacidad</a>
-                                <a href="#">Términos</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="py-8 border-t border-white/5 text-center">
+                <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em]">
+                    &copy; 2024 Rente Confort &bull; Luxury Event Experience &bull; León, Gto.
+                </p>
             </div>
-        </footer>
-    </div>
-    <!-- Chat widget (fijo inferior derecho) -->
-    <div class="fixed bottom-24 right-4 z-[100] flex flex-col items-end">
+        </div>
+    </footer>
+
+    <!-- Chat Widget Estilizado -->
+    <div id="chat-widget" class="fixed bottom-24 right-6 lg:bottom-8 lg:right-8 z-[60]">
+        <!-- Botón del Chat -->
+        <button onclick="toggleChat()"
+            class="w-16 h-16 bg-gold-400 text-royal-900 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group relative">
+            <i class="bx bxs-chat text-3xl transition-transform group-hover:rotate-12"></i>
+            <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-royal-900 text-white text-[10px] flex items-center justify-center rounded-full border-2 border-white animate-pulse">1</span>
+        </button>
+
+        <!-- Ventana del Chat -->
         <div id="chat-window"
-            class="hidden w-[90vw] md:w-[380px] bg-white rounded-2xl shadow-2xl flex flex-col mb-4 overflow-hidden border border-slate-200 transform transition-all duration-300 origin-bottom-right animate-fade-up h-[500px] max-h-[80vh]">
-            <div class="bg-royal-900 p-4 flex justify-between items-center shrink-0">
-                <div class="flex items-center gap-3">
+            class="hidden absolute bottom-20 right-0 w-[350px] md:w-[400px] h-[550px] bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden border border-slate-100 animate-fade-up">
+            <!-- Header -->
+            <div class="p-6 bg-royal-900 text-white flex justify-between items-center">
+                <div class="flex items-center gap-4">
                     <div class="relative">
-                        <img alt="Santiago"
-                            src="https://img.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg?w=200"
-            class="w-10 h-10 rounded-full border-2 border-gold-400 object-cover" />
-                        <span
-            class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-royal-900 rounded-full"></span>
+                        <div class="w-12 h-12 bg-gold-400 rounded-2xl flex items-center justify-center text-royal-900">
+                            <i class="bx bx-user-voice text-2xl"></i>
+                        </div>
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full">
+                        </div>
                     </div>
                     <div>
-                        <p class="font-bold text-white text-sm">Santiago</p>
-                        <p class="text-[10px] text-gold-400 uppercase tracking-wider">
-                            Concierge Digital
-                        </p>
+                        <h4 class="font-serif font-bold text-lg">Santiago</h4>
+                        <p class="text-[10px] text-gold-400 uppercase tracking-widest font-bold">Asesor de Protocolo</p>
                     </div>
                 </div>
-                <button type="button" onclick="toggleChat()" title="Cerrar chat"
-    class="text-slate-400 hover:text-white">
-                    <i class="bx bx-x text-2xl"></i>
+                <button onclick="toggleChat()" class="text-white/50 hover:text-white transition-colors">
+                    <i class="bx bx-x text-3xl"></i>
                 </button>
             </div>
 
-            <div id="chat-content" class="flex-1 overflow-y-auto p-4 bg-slate-50 space-y-4 custom-scroll"></div>
+            <!-- Messages Area -->
+            <div id="chat-content" class="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50/50 custom-scroll">
+                <!-- Los mensajes se inyectan vía JS -->
+            </div>
 
-            <div class="bg-white border-t border-slate-100 shrink-0">
-                <div id="chat-suggestions"
-    class="px-4 py-3 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide bg-slate-50/50"></div>
-                <div class="p-3 flex gap-2 items-center">
-                    <input type="text" id="chat-input" placeholder="Escribe un mensaje..."
-        class="flex-1 bg-slate-100 rounded-full px-4 py-2 text-sm focus:ring-1 focus:ring-gold-400 focus:bg-white outline-none transition text-slate-700"
+            <!-- Footer / Input -->
+            <div class="p-4 bg-white border-t border-slate-100">
+                <div class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Pregunta algo o elige una opción..."
+                        class="flex-1 bg-slate-100 border-none rounded-2xl px-5 py-4 text-sm focus:ring-2 focus:ring-gold-400 outline-none transition-all"
                         onkeypress="if(event.key === 'Enter') handleUserMessage()" />
-                    <button type="button" title="Enviar mensaje" onclick="handleUserMessage()"
-        class="w-9 h-9 bg-royal-900 text-white rounded-full flex items-center justify-center hover:bg-gold-500 transition shadow-lg transform active:scale-95">
-                        <i class="bx bxs-send"></i>
+                    <button onclick="handleUserMessage()"
+                        class="w-14 h-14 bg-royal-900 text-white rounded-2xl flex items-center justify-center hover:bg-gold-400 transition-colors shadow-lg">
+                        <i class="bx bx-send text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-
-        <button type="button" id="chat-toggle-btn" onclick="toggleChat()" title="Abrir chat"
-            class="group relative w-14 h-14 bg-royal-900 rounded-full shadow-2xl flex items-center justify-center border border-gold-400 hover:scale-110 transition duration-300 z-50">
-            <i class="bx bxs-message-dots text-2xl text-white group-hover:hidden"></i>
-            <i class="bx bx-x text-3xl text-white hidden group-hover:block"></i>
-            <span
-class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold flex items-center justify-center rounded-full border border-royal-900 animate-bounce">1</span>
-        </button>
     </div>
 
-    <div id="new-review-modal"
-        class="hidden fixed inset-0 z-[110] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-md w-full p-6 relative animate-fade-up">
-            <button title="Cerrar modal" type="button"
-                onclick="document.getElementById('new-review-modal').classList.add('hidden')"
-class="absolute top-4 right-4 text-slate-400 hover:text-red-500">
-                <i class="bx bx-x text-2xl"></i>
-            </button>
-            <h3 class="text-xl font-serif text-royal-900 mb-4">
-                Comparte tu Experiencia
-            </h3>
-            <input type="text" id="review-name" placeholder="Tu Nombre"
-class="w-full mb-3 p-3 border rounded focus:border-gold-400 outline-none text-sm" />
-            <textarea id="review-text" rows="3" placeholder="¿Qué te pareció nuestro servicio?"
-class="w-full mb-3 p-3 border rounded focus:border-gold-400 outline-none text-sm resize-none"></textarea>
-            <div class="flex gap-2 mb-4 justify-center">
-                <i class="fas fa-star text-slate-300 text-xl cursor-pointer hover:text-gold-500"
-                    onclick="setRating(1)"></i>
-                <i class="fas fa-star text-slate-300 text-xl cursor-pointer hover:text-gold-500"
-                    onclick="setRating(2)"></i>
-                <i class="fas fa-star text-slate-300 text-xl cursor-pointer hover:text-gold-500"
-                    onclick="setRating(3)"></i>
-                <i class="fas fa-star text-slate-300 text-xl cursor-pointer hover:text-gold-500"
-                    onclick="setRating(4)"></i>
-                <i class="fas fa-star text-slate-300 text-xl cursor-pointer hover:text-gold-500"
-                    onclick="setRating(5)"></i>
+    <!-- Modal de Reseñas -->
+    <div id="new-review-modal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-md z-[100] hidden items-center justify-center p-6">
+        <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden animate-fade-up">
+            <div class="p-8 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
+                <h3 class="text-2xl font-serif text-royal-900 font-bold">Tu Experiencia</h3>
+                <button onclick="document.getElementById('new-review-modal').classList.add('hidden')" class="text-slate-400 hover:text-royal-900"><i class="bx bx-x text-3xl"></i></button>
             </div>
-            <button type="button" onclick="submitNewReview()"
-class="w-full bg-royal-900 text-white font-bold py-3 rounded hover:bg-gold-500 transition">
-                Publicar
-            </button>
+            <div class="p-8 space-y-6">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">Calificación</label>
+                    <div class="flex gap-2 text-2xl">
+                        <i class="bx bxs-star text-slate-200 cursor-pointer hover:text-gold-400 transition-colors" onclick="setRating(1)"></i>
+                        <i class="bx bxs-star text-slate-200 cursor-pointer hover:text-gold-400 transition-colors" onclick="setRating(2)"></i>
+                        <i class="bx bxs-star text-slate-200 cursor-pointer hover:text-gold-400 transition-colors" onclick="setRating(3)"></i>
+                        <i class="bx bxs-star text-slate-200 cursor-pointer hover:text-gold-400 transition-colors" onclick="setRating(4)"></i>
+                        <i class="bx bxs-star text-slate-200 cursor-pointer hover:text-gold-400 transition-colors" onclick="setRating(5)"></i>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <input type="text" id="review-name" placeholder="Tu Nombre o Evento" class="w-full bg-slate-100 border-none rounded-xl px-5 py-4 text-sm focus:ring-2 focus:ring-gold-400 outline-none">
+                    <textarea id="review-text" rows="4" placeholder="¿Cómo fue tu experiencia con Rente Confort?" class="w-full bg-slate-100 border-none rounded-xl px-5 py-4 text-sm focus:ring-2 focus:ring-gold-400 outline-none resize-none"></textarea>
+                </div>
+                <button onclick="submitNewReview()" class="w-full bg-royal-900 text-white font-bold py-5 rounded-2xl hover:bg-gold-400 transition-all shadow-xl shadow-royal-900/10 uppercase text-xs tracking-widest">Publicar Testimonio</button>
+            </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 
 </html>
