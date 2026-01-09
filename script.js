@@ -149,25 +149,60 @@ function mostrarPaquete(idx, tipoAnimacion) {
     return itemData ? `<li class="flex items-center text-sm"><i class='bx ${itemData.img} text-gold-400 mr-2 text-lg'></i> ${itemData.name}</li>` : '';
   }).join('');
   const htmlSlide = `
-    <div class="slide-content w-full h-full lg:max-h-[480px] flex flex-row items-center justify-between p-4 md:p-16 gap-4 absolute top-0 left-0 border border-gold-300 bg-royal-500">
-      <div class="md:w-1/2 text-white z-10">
-        <div class="inline-block px-3 py-1 border border-gold-500 rounded-full text-[10px] font-bold uppercase tracking-widest text-gold-500 mb-2">
-          Capacidad: ${pkg.pax}
-        </div>
-        <h3 class="text-2xl md:text-5xl font-serif mb-4 leading-tight">${pkg.titulo}</h3>
-        <p class="text-l text-slate-200 mb-8 font-light italic border-l-4 border-gold-500 pl-4">"${pkg.desc}"</p>
-        <div class="flex items-end gap-2 mb-8">
-          <span class="text-2xl font-bold text-white">$${formatMoney(pkg.precio)}</span>
-          <span class="text-sm text-slate-300 mb-2">/ evento</span>
-        </div>
-        <button onclick="botReservePackage(${pkg.id})" class="bg-gold-metallic text-royal-900 px-6 py-3 rounded-full hover:bg-gold-100 transition shadow-lg font-bold uppercase text-sm tracking-wide">Reservar Paquete</button>
-      </div>
-      <div class="md:w-5/12 bg-royal-900/40 backdrop-blur-md p-6 rounded-lg border border-gold-500/50 shadow-2xl z-10 w-full">
-        <h4 class="text-white font-serif mb-4 border-b border-white/20 pb-2">Incluye:</h4>
-        <ul class="text-slate-100 grid grid-cols-1 gap-3">${listaItems}</ul>
-      </div>
+  <div class="slide-content w-full min-h-full lg:h-[480px] flex flex-col lg:flex-row items-center justify-center lg:justify-between p-6 md:p-12 lg:p-16 gap-8 relative overflow-hidden border border-gold-400/30 bg-gradient-to-br from-royal-900 via-royal-800 to-royal-900 rounded-3xl">
+  
+  <div class="absolute top-0 right-0 w-64 h-64 bg-gold-400/10 rounded-full blur-[80px] -mr-32 -mt-32"></div>
+  <div class="absolute bottom-0 left-0 w-48 h-48 bg-royal-400/20 rounded-full blur-[60px] -ml-24 -mb-24"></div>
+
+  <div class="w-full lg:w-1/2 text-white z-10 space-y-4 md:space-y-6">
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-gold-400/10 border border-gold-400/50 rounded-full">
+        <i class="bx bx-group text-gold-400 text-xs"></i>
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-gold-400">Capacidad: ${pkg.pax} Personas</span>
     </div>
-  `;
+
+    <h3 class="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-none tracking-tight">
+        ${pkg.titulo.split(' ')[0]} <span class="text-gold-400 block lg:inline">${pkg.titulo.split(' ').slice(1).join(' ')}</span>
+    </h3>
+
+    <p class="text-sm md:text-base text-slate-300 font-light italic border-l-2 border-gold-400/60 pl-4 max-w-md leading-relaxed">
+        "${pkg.desc}"
+    </p>
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-6 pt-4">
+        <div class="flex flex-col">
+            <span class="text-[10px] uppercase text-gold-400/70 tracking-widest font-bold">Inversión</span>
+            <div class="flex items-baseline gap-1">
+                <span class="text-3xl md:text-4xl font-bold text-white">$${formatMoney(pkg.precio)}</span>
+                <span class="text-xs text-slate-400 font-medium">MXN</span>
+            </div>
+        </div>
+        
+        <button onclick="botReservePackage(${pkg.id})" 
+            class="group relative overflow-hidden bg-gold-400 text-royal-900 px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-gold-400/20 font-black uppercase text-xs tracking-widest">
+            <span class="relative z-10 flex items-center gap-2">
+                Reservar Ahora <i class="bx bx-right-arrow-alt text-lg group-hover:translate-x-1 transition-transform"></i>
+            </span>
+        </button>
+    </div>
+  </div>
+
+  <div class="w-full lg:w-5/12 z-10">
+    <div class="bg-white/[0.03] backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 shadow-2xl relative group hover:border-gold-400/40 transition-colors duration-500">
+        <div class="absolute -top-3 -right-3 w-12 h-12 bg-royal-900 border border-gold-400 rounded-full flex items-center justify-center text-gold-400 shadow-lg">
+            <i class="bx bx-star text-xl animate-pulse"></i>
+        </div>
+
+        <h4 class="text-white font-serif text-xl mb-6 flex items-center gap-3">
+            <span class="w-8 h-px bg-gold-400/50"></span>
+            Detalles del Set
+        </h4>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 overflow-y-auto max-h-[200px] lg:max-h-none pr-2 custom-scrollbar">
+            ${listaItems}
+        </ul>
+    </div>
+  </div>
+</div>`;
   contenedorSlider.innerHTML = htmlSlide;
   const nuevoSlide = contenedorSlider.querySelector('.slide-content');
   if (!nuevoSlide) return;
